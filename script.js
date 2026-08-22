@@ -1,12 +1,11 @@
 /* ============ Ayush Kumar Pandey — Portfolio JS ============ */
 
-// ---------- Typing effect ----------
 const phrases = [
-  'Machine Learning.',
-  'Python & Flask.',
-  'Automation.',
-  'Data Science.',
-  'REST APIs.'
+  'AI / ML Solutions.',
+  'Data Pipelines & PySpark.',
+  'Snowflake & ETL.',
+  'Backend REST APIs.',
+  'Computer Vision & TensorFlow.'
 ];
 const typedEl = document.getElementById('typed');
 let phraseIdx = 0, charIdx = 0, deleting = false;
@@ -64,7 +63,7 @@ navMenu.querySelectorAll('.nav-link').forEach(link => {
 
 // ---------- Reveal sections on scroll ----------
 const revealTargets = document.querySelectorAll(
-  '.section-title, .about-grid, .skill-card, .project-card, .timeline-item, .contact-text'
+  '.section-title, .about-grid, .skill-card, .project-card, .timeline-item, .cert-card, .contact-text'
 );
 revealTargets.forEach(el => el.classList.add('reveal'));
 

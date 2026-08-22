@@ -456,12 +456,22 @@ body::before {
   margin-bottom: 1.1rem;
 }
 .project-icon { font-size: 2.2rem; }
+.project-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
 .project-links a {
   color: var(--text-dim);
-  transition: color 0.2s;
-  margin-left: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, transform 0.2s;
 }
-.project-links a:hover { color: var(--accent); }
+.project-links a:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
 
 .project-title {
   font-size: 1.25rem;
@@ -523,6 +533,45 @@ body::before {
 .timeline-content p { color: var(--text-dim); font-size: 0.95rem; }
 .timeline-content .tags { margin-top: 0.9rem; }
 
+/* ============ Certifications & Achievements ============ */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.4rem;
+}
+.cert-card {
+  background: var(--card);
+  border: 1px solid rgba(100, 255, 218, 0.08);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: transform 0.25s ease, border-color 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+.cert-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(100, 255, 218, 0.3);
+}
+.cert-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+.cert-badge-icon { font-size: 1.8rem; }
+.cert-title { font-size: 1.05rem; font-weight: 600; }
+.cert-issuer {
+  font-family: var(--mono);
+  color: var(--accent);
+  font-size: 0.83rem;
+  margin-bottom: 0.6rem;
+}
+.cert-desc { color: var(--text-dim); font-size: 0.9rem; flex: 1; }
+
+.achieve-card {
+  border-left: 3px solid var(--accent);
+}
+
 /* ============ Contact ============ */
 .contact-section {
   text-align: center;
@@ -530,11 +579,37 @@ body::before {
 }
 .contact-text {
   color: var(--text-dim);
-  max-width: 560px;
-  margin: 0 auto 2.2rem;
+  max-width: 580px;
+  margin: 0 auto 1.8rem;
   font-size: 1.08rem;
 }
 .contact-text strong { color: var(--accent); }
+
+.contact-info-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.contact-pill {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid rgba(100, 255, 218, 0.15);
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.contact-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
 .contact-socials {
   justify-content: center;
   margin-top: 2.5rem;

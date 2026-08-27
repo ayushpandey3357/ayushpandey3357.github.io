@@ -625,6 +625,245 @@ body::before {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* ============ LeetCode Section ============ */
+.leetcode-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.leetcode-card-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.leetcode-stats-card, .leetcode-embed-card {
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.leetcode-stats-card:hover, .leetcode-embed-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 161, 22, 0.35);
+  box-shadow: 0 12px 35px -10px rgba(255, 161, 22, 0.15);
+}
+
+.leetcode-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.leetcode-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.leetcode-logo-icon {
+  filter: drop-shadow(0 2px 8px rgba(255, 161, 22, 0.4));
+}
+
+.leetcode-username {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.leetcode-handle {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.btn-sm {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.82rem;
+}
+
+.leetcode-metrics-wrapper {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.6rem;
+}
+
+.leetcode-main-counter {
+  text-align: center;
+  background: rgba(15, 21, 38, 0.7);
+  border: 1px solid rgba(255, 161, 22, 0.15);
+  border-radius: 12px;
+  padding: 1.2rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter-num {
+  font-family: var(--mono);
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #FFA116;
+  line-height: 1;
+}
+
+.counter-label {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.leetcode-rank-tag {
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  font-family: var(--mono);
+  color: var(--accent);
+  background: rgba(100, 255, 218, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.leetcode-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.lc-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.86rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.easy .lc-bar-header span:first-child { color: #00b8a3; }
+.medium .lc-bar-header span:first-child { color: #ffc01e; }
+.hard .lc-bar-header span:first-child { color: #ff375f; }
+
+.lc-progress-bg {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.lc-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 1s ease-out;
+}
+
+.easy-fill { background: linear-gradient(90deg, #00b8a3, #2cd8c5); }
+.medium-fill { background: linear-gradient(90deg, #ffc01e, #ffdb6e); }
+.hard-fill { background: linear-gradient(90deg, #ff375f, #ff6b8b); }
+
+.leetcode-recent-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 1.2rem;
+}
+
+.recent-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pulse-dot, .live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00b8a3;
+  display: inline-block;
+  box-shadow: 0 0 8px #00b8a3;
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+.recent-sub-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sub-tag {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sub-tag small {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+.leetcode-embed-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.embed-header {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.live-dot {
+  color: #00b8a3;
+  background: rgba(0, 184, 163, 0.1);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.embed-img-wrapper {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.leetcode-widget-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* ============ Animations ============ */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
@@ -643,6 +882,7 @@ body::before {
   }
   .hero-visual { max-width: 480px; }
   .about-grid { grid-template-columns: 1fr; }
+  .leetcode-card-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 700px) {
@@ -665,4 +905,6 @@ body::before {
   .hamburger { display: flex; }
   .about-highlights { grid-template-columns: 1fr; }
   .section { padding: 3.5rem 1.4rem; }
+  .leetcode-metrics-wrapper { grid-template-columns: 1fr; }
 }
+

@@ -864,6 +864,90 @@ body::before {
   display: block;
 }
 
+/* ============ GeeksforGeeks Card Styles ============ */
+.gfg-stats-card {
+  background: var(--card);
+  border: 1px solid rgba(47, 141, 70, 0.25);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gfg-stats-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(47, 141, 70, 0.6);
+  box-shadow: 0 12px 35px -10px rgba(47, 141, 70, 0.25);
+}
+
+.gfg-logo-icon {
+  filter: drop-shadow(0 2px 8px rgba(47, 141, 70, 0.4));
+}
+
+.gfg-handle {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: #00E676;
+}
+
+.btn-gfg {
+  border-color: rgba(47, 141, 70, 0.5);
+  color: #00E676;
+}
+
+.btn-gfg:hover {
+  background: rgba(47, 141, 70, 0.15);
+  border-color: #00E676;
+  color: #00E676;
+}
+
+.gfg-pills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.gfg-stat-box {
+  background: rgba(15, 21, 38, 0.7);
+  border: 1px solid rgba(47, 141, 70, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.gfg-stat-num {
+  font-family: var(--mono);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #00E676;
+  display: block;
+}
+
+.gfg-stat-lbl {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gfg-dot {
+  background: #00E676;
+  box-shadow: 0 0 8px #00E676;
+}
+
+.gfg-tag small {
+  color: #00E676;
+}
+
+.gfg-full-width {
+  grid-column: 1 / -1;
+}
+
+
 /* ============ Animations ============ */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }

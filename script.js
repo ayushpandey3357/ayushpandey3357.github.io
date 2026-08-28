@@ -1,7 +1,7 @@
 /* ============ Ayush Kumar Pandey — Portfolio JS ============ */
 
 const phrases = [
-  '150+ Problems on LeetCode.',
+  '200+ DSA Problems (LeetCode & GFG).',
   'AI / ML Solutions.',
   'Data Pipelines & PySpark.',
   'Snowflake & ETL.',
@@ -207,4 +207,25 @@ function animateLeetCodeCounters() {
 
 // Fetch stats on page load
 fetchLeetCodeStats();
+
+async function fetchGFGStats() {
+  const username = 'ayushpan50qt';
+  try {
+    const res = await fetch(`https://gfg-stats-api.vercel.app/${username}`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data && data.totalProblemsSolved !== undefined) {
+      const gfgSolvedEl = document.getElementById('gfg-total-solved');
+      const gfgDaysEl = document.getElementById('gfg-active-days');
+      if (gfgSolvedEl) gfgSolvedEl.textContent = `${data.totalProblemsSolved}+`;
+      if (gfgDaysEl && data.data && data.data.totalActiveDays) {
+        gfgDaysEl.textContent = `${data.data.totalActiveDays} Days`;
+      }
+    }
+  } catch (err) {
+    console.log('Using fallback static GFG data:', err);
+  }
+}
+
+fetchGFGStats();
 

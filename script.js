@@ -64,7 +64,7 @@ navMenu.querySelectorAll('.nav-link').forEach(link => {
 
 // ---------- Reveal sections on scroll ----------
 const revealTargets = document.querySelectorAll(
-  '.section-title, .about-grid, .skill-card, .project-card, .timeline-item, .cert-card, .contact-text, .leetcode-stats-card, .gfg-stats-card, .leetcode-embed-card'
+  '.section-title, .about-grid, .skill-card, .project-card, .timeline-item, .cert-card, .contact-text, .leetcode-stats-card, .gfg-stats-card, .leetcode-embed-card, .gfg-showcase-banner'
 );
 revealTargets.forEach(el => el.classList.add('reveal'));
 

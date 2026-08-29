@@ -1,16 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ayush Kumar Pandey | AI/ML &amp; Data Engineering</title>
-  <meta name="description" content="Portfolio of Ayush Kumar Pandey — B.Tech Computer Science student specializing in AI/ML, Data Engineering, PySpark, Snowflake, and Backend Development." />
+  <title>Ayush Kumar Pandey | AI/ML &amp; Data Engineering Portfolio</title>
+  <meta name="description" content="Portfolio of Ayush Kumar Pandey — Computer Science Student specializing in AI/ML, Data Engineering (PySpark, Snowflake), and Scalable Backend Development." />
+  <meta name="keywords" content="Ayush Kumar Pandey, Portfolio, AI ML Engineer, Data Engineer, PySpark, Snowflake, Python, Django, TensorFlow, BBDNIIT, Infosys Springboard" />
+  <meta name="author" content="Ayush Kumar Pandey" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ayushpandey3357.github.io/" />
+  <meta property="og:title" content="Ayush Kumar Pandey — AI/ML & Data Engineering Portfolio" />
+  <meta property="og:description" content="Explore projects, skills, certifications, and DSA achievements of Ayush Kumar Pandey." />
+  <meta property="og:image" content="images/portfolio-preview.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://ayushpandey3357.github.io/" />
+  <meta property="twitter:title" content="Ayush Kumar Pandey — AI/ML & Data Engineering Portfolio" />
+  <meta property="twitter:description" content="Explore projects, skills, certifications, and DSA achievements of Ayush Kumar Pandey." />
+  <meta property="twitter:image" content="images/portfolio-preview.png" />
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ayush Kumar Pandey",
+    "url": "https://ayushpandey3357.github.io/",
+    "sameAs": [
+      "https://github.com/ayushpandey3357",
+      "https://linkedin.com/in/ayushpandey3357",
+      "https://leetcode.com/u/P5Dtti61ig/",
+      "https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity"
+    ],
+    "jobTitle": "AI/ML & Data Engineer",
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Babu Banarasi Das Northern India Institute of Technology"
+    },
+    "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Data Engineering", "Apache Spark", "Snowflake", "Python", "TensorFlow", "Django", "SQL"]
+  }
+  </script>
 </head>
 <body>
+
+  <!-- Ambient Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
   <!-- ===== Navbar ===== -->
   <nav class="navbar" id="navbar">
@@ -23,70 +70,136 @@
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#experience" class="nav-link">Experience</a></li>
         <li><a href="#certifications" class="nav-link">Certifications</a></li>
-        <li><a href="#leetcode" class="nav-link">LeetCode &amp; GFG</a></li>
+        <li><a href="#leetcode" class="nav-link">DSA Profiles</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+
+      <div class="nav-actions">
+        <!-- Dark/Light Theme Toggle -->
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark and light theme" title="Toggle Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <a href="https://github.com/ayushpandey3357" target="_blank" rel="noopener" class="btn btn-outline btn-sm nav-resume-btn">
+          <span>GitHub</span> ↗
+        </a>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
-  <!-- ===== Hero ===== -->
+  <!-- ===== Hero Section ===== -->
   <section class="hero" id="home">
     <div class="hero-content">
+      <div class="hero-badge">
+        <span class="status-dot-pulse"></span> Open to SDE &amp; Data Engineering Internships
+      </div>
       <p class="hero-greeting">Hi, my name is</p>
       <h1 class="hero-name">Ayush Kumar Pandey<span class="accent">.</span></h1>
       <h2 class="hero-tagline">I build AI systems &amp; data pipelines with <span class="typed" id="typed"></span><span class="cursor">|</span></h2>
       <p class="hero-desc">
         Computer Science undergraduate with hands-on experience in <strong>AI/ML</strong>,
         <strong>Data Engineering</strong> (Apache Spark, Snowflake, ETL pipelines), and scalable
-        <strong>Backend Systems</strong>. Solved 200+ DSA problems and seeking
-        <strong>Software Engineering</strong> or <strong>Data Engineering internships</strong>.
+        <strong>Backend Systems</strong>. Solved 200+ DSA problems on LeetCode &amp; GFG.
       </p>
       <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+        <a href="#projects" class="btn btn-primary">View My Work 🚀</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch ✉️</a>
       </div>
       <div class="hero-socials">
-        <a href="https://github.com/ayushpandey3357" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub Profile">
+        <a href="https://github.com/ayushpandey3357" target="_blank" rel="noopener" aria-label="GitHub Profile" title="GitHub Profile">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3z"/></svg>
         </a>
-        <a href="https://linkedin.com/in/ayushpandey3357" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn Profile">
+        <a href="https://linkedin.com/in/ayushpandey3357" target="_blank" rel="noopener" aria-label="LinkedIn Profile" title="LinkedIn Profile">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.3zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zm1.8 13.1H3.5V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 1 .8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7c0-1-.8-1.7-1.8-1.7z"/></svg>
         </a>
-        <a href="https://leetcode.com/u/P5Dtti61ig/" target="_blank" rel="noopener" aria-label="LeetCode" title="LeetCode Profile">
+        <a href="https://leetcode.com/u/P5Dtti61ig/" target="_blank" rel="noopener" aria-label="LeetCode Profile" title="LeetCode Profile">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
         </a>
-        <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" rel="noopener" aria-label="GeeksforGeeks" title="GeeksforGeeks Profile">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M21.45 14.315c-.143.28-.334.532-.565.745a3.691 3.691 0 0 1-1.104.695 4.51 4.51 0 0 1-3.116-.016 3.79 3.79 0 0 1-2.135-2.078 3.571 3.571 0 0 1-.13-.353h7.418a4.26 4.26 0 0 1-.368 1.008zm-11.99-.654a3.793 3.793 0 0 1-2.134 2.078 4.51 4.51 0 0 1-3.117.016 3.7 3.7 0 0 1-1.104-.695 2.652 2.652 0 0 1-.564-.745 4.221 4.221 0 0 1-.368-1.006H9.59c-.038.12-.08.238-.13.352zm14.501-1.758a3.849 3.849 0 0 0-.082-.475l-9.634-.008a3.932 3.932 0 0 1 1.143-2.348c.363-.35.79-.625 1.26-.809a3.97 3.97 0 0 1 4.484.957l1.521-1.49a5.7 5.7 0 0 0-1.922-1.357 6.283 6.283 0 0 0-2.544-.49 6.35 6.35 0 0 0-2.405.457 6.007 6.007 0 0 0-1.905 1.252 5.922 5.922 0 0 0-1.272 1.879 5.67 5.67 0 0 0-.462 2.32 5.56 5.56 0 0 0 .476 2.316 6.02 6.02 0 0 0 1.282 1.867 6.082 6.082 0 0 0 1.907 1.238 6.376 6.376 0 0 0 2.392.446 6.223 6.223 0 0 0 2.583-.526 5.617 5.617 0 0 0 1.942-1.433l-1.579-1.431a3.882 3.882 0 0 1-1.274.877 4.092 4.092 0 0 1-1.67.332 4.043 4.043 0 0 1-1.549-.29 3.81 3.81 0 0 1-1.237-.817 3.96 3.96 0 0 1-.806-1.237 4.195 4.195 0 0 1-.274-1.127h18.349a4.42 4.42 0 0 0-.001-.48z"/></svg>
+        <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" rel="noopener" aria-label="GeeksforGeeks Profile" title="GeeksforGeeks Profile">
+          <svg viewBox="0 0 60 30" width="24" height="24" fill="currentColor"><path d="M59.033 13.628H34.626a9.748 9.748 0 0 1 17.129-5.146l3.55-3.57a14.77 14.77 0 0 0-25.724 8.716h-.085a14.77 14.77 0 0 0-25.724-8.716l3.55 3.57a9.748 9.748 0 0 1 17.129 5.146H.043q-.043.565-.044 1.141a14.771 14.771 0 0 0 29.149 3.383h.778a14.769 14.769 0 0 0 29.149-3.383q-.041-.576-.085-1.141ZM14.769 24.517a9.749 9.749 0 0 1-9.151-6.385h18.3a9.75 9.75 0 0 1-9.149 6.385Zm29.538 0a9.75 9.75 0 0 1-9.152-6.385h18.3a9.75 9.75 0 0 1-9.148 6.385Z"/></svg>
         </a>
-        <a href="mailto:ayushpandey1974@gmail.com" aria-label="Email" title="Email Direct">
+        <a href="mailto:ayushpandey1974@gmail.com" aria-label="Direct Email" title="Email Direct">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5v2.2z"/></svg>
         </a>
       </div>
     </div>
+
+    <!-- Interactive Terminal Window -->
     <div class="hero-visual">
-      <div class="code-window">
+      <div class="code-window" id="interactive-terminal-window">
         <div class="code-header">
           <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-          <span class="code-title">ayush.py</span>
+          <span class="code-title">ayush@dev-terminal: ~ (interactive)</span>
         </div>
-        <pre class="code-body"><code><span class="kw">class</span> <span class="cls">SoftwareEngineer</span>:
+        <div class="terminal-body" id="terminal-body">
+          <div class="term-line output-welcome">
+            <span class="term-prompt">ayush@portfolio:~$</span> welcome --interactive
+          </div>
+          <div class="term-line output-text">
+            👋 Welcome! Type <span class="term-cmd">help</span> or click command chips below to explore!
+          </div>
+          
+          <pre class="code-body"><code><span class="kw">class</span> <span class="cls">SoftwareEngineer</span>:
     <span class="kw">def</span> <span class="fn">__init__</span>(self):
         self.name = <span class="str">"Ayush Kumar Pandey"</span>
         self.role = <span class="str">"AI/ML &amp; Data Engineer"</span>
-        self.skills = [<span class="str">"Python"</span>, <span class="str">"PySpark"</span>, <span class="str">"Snowflake"</span>,
-                       <span class="str">"TensorFlow"</span>, <span class="str">"Flask/Django"</span>]
-        self.dsa_solved = <span class="str">"200+ Problems"</span>
+        self.stack = [<span class="str">"PySpark"</span>, <span class="str">"Snowflake"</span>, <span class="str">"TensorFlow"</span>, <span class="str">"Django"</span>]
+        self.dsa_solved = <span class="str">"200+ Solved"</span>
 
-    <span class="kw">def</span> <span class="fn">current_goal</span>(self):
-        <span class="kw">return</span> <span class="str">"SDE / Data Eng Internship 🚀"</span></code></pre>
+    <span class="kw">def</span> <span class="fn">get_status</span>(self):
+        <span class="kw">return</span> <span class="str">"Seeking SDE / Data Eng Internship 🚀"</span></code></pre>
+        </div>
+
+        <div class="terminal-quick-chips">
+          <button class="chip-btn" data-cmd="skills">⚡ skills</button>
+          <button class="chip-btn" data-cmd="projects">🚀 projects</button>
+          <button class="chip-btn" data-cmd="gfg">🟢 gfg stats</button>
+          <button class="chip-btn" data-cmd="leetcode">🟠 leetcode</button>
+          <button class="chip-btn" data-cmd="contact">✉️ contact</button>
+          <button class="chip-btn" data-cmd="help">❓ help</button>
+          <button class="chip-btn" data-cmd="clear">🧹 clear</button>
+        </div>
+
+        <form class="terminal-input-row" id="terminal-form">
+          <span class="term-prompt">&gt;</span>
+          <input type="text" id="terminal-input" placeholder="Type a command (e.g. skills, projects)..." autocomplete="off" spellcheck="false" />
+        </form>
       </div>
     </div>
   </section>
 
-  <!-- ===== About ===== -->
+  <!-- Hero Stat Impact Metrics Counter Bar -->
+  <section class="stats-counter-bar">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-num" data-target="200" id="stat-dsa">0</div>
+        <div class="stat-plus">+</div>
+        <div class="stat-label">DSA Solved (LeetCode &amp; GFG)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="90" id="stat-acc">0</div>
+        <div class="stat-plus">%</div>
+        <div class="stat-label">AI Model Disease Accuracy</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="3" id="stat-projects">0</div>
+        <div class="stat-plus">+</div>
+        <div class="stat-label">Live Production Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="5" id="stat-certs">0</div>
+        <div class="stat-plus">+</div>
+        <div class="stat-label">Certifications &amp; Awards</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About Section ===== -->
   <section class="section" id="about">
     <h2 class="section-title"><span class="section-num">01.</span> About Me</h2>
     <div class="about-grid">
@@ -102,95 +215,168 @@
         <p>
           My technical expertise spans building ML-powered applications (like <strong>VideoAuthenticator</strong> &amp; <strong>Krishi-Mitra</strong>),
           designing automated data pipelines with <strong>Apache Spark (PySpark)</strong> and <strong>Snowflake</strong>, and engineering scalable backend REST APIs.
-          I have also solved <strong>200+ Data Structures &amp; Algorithms problems</strong> across LeetCode and GeeksforGeeks.
         </p>
-        <ul class="about-highlights">
-          <li>🎓 B.Tech CSE @ BBDNIIT (2023 - 2027)</li>
-          <li>🤖 Infosys Springboard AI Domain Intern</li>
-          <li>⚡ 200+ DSA Problems Solved</li>
-          <li>🏆 3rd Place — INVEDX Coding Competition</li>
-        </ul>
+        <div class="about-highlights">
+          <div class="highlight-box">
+            <span class="hl-icon">🎓</span>
+            <div>
+              <strong>B.Tech CSE</strong>
+              <small>BBDNIIT (2023 - 2027)</small>
+            </div>
+          </div>
+          <div class="highlight-box">
+            <span class="hl-icon">🤖</span>
+            <div>
+              <strong>Infosys Springboard Intern</strong>
+              <small>AI &amp; Machine Learning Domain</small>
+            </div>
+          </div>
+          <div class="highlight-box">
+            <span class="hl-icon">⚡</span>
+            <div>
+              <strong>200+ Solved</strong>
+              <small>LeetCode &amp; GeeksforGeeks</small>
+            </div>
+          </div>
+          <div class="highlight-box">
+            <span class="hl-icon">🏆</span>
+            <div>
+              <strong>3rd Place Winner</strong>
+              <small>INVEDX Coding Competition</small>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="about-card">
-        <h3>Quick Facts</h3>
-        <div class="fact"><span class="fact-label">Location</span><span>Lucknow, India 📍</span></div>
-        <div class="fact"><span class="fact-label">Focus</span><span>AI/ML, Data Engineering &amp; Backend</span></div>
-        <div class="fact"><span class="fact-label">DSA Status</span><span>200+ Solved (LeetCode &amp; GFG)</span></div>
-        <div class="fact"><span class="fact-label">Status</span><span class="status-open">Open to SDE &amp; Data Eng. Internships ✅</span></div>
+        <h3>Quick Overview</h3>
+        <div class="fact"><span class="fact-label">Location</span><span>Lucknow, Uttar Pradesh, India 📍</span></div>
+        <div class="fact"><span class="fact-label">Primary Focus</span><span>AI/ML, Data Engineering &amp; Backend</span></div>
+        <div class="fact"><span class="fact-label">Key Stack</span><span>Python, PySpark, Snowflake, Django, SQL</span></div>
+        <div class="fact"><span class="fact-label">Current Status</span><span class="status-open">Open to SDE &amp; Data Eng. Roles ✅</span></div>
+        <div class="fact-action">
+          <a href="#contact" class="btn btn-primary btn-sm block-btn">Let's Connect 👋</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Skills ===== -->
+  <!-- ===== Skills Section ===== -->
   <section class="section" id="skills">
-    <h2 class="section-title"><span class="section-num">02.</span> Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <h3>💻 Languages</h3>
+    <h2 class="section-title"><span class="section-num">02.</span> Skills &amp; Tech Stack</h2>
+
+    <!-- Skill Filter Pills -->
+    <div class="skills-filter-wrapper">
+      <button class="skill-filter-btn active" data-skill-cat="all">All Skills</button>
+      <button class="skill-filter-btn" data-skill-cat="languages">Languages</button>
+      <button class="skill-filter-btn" data-skill-cat="data-eng">Data Engineering</button>
+      <button class="skill-filter-btn" data-skill-cat="aiml">AI &amp; Machine Learning</button>
+      <button class="skill-filter-btn" data-skill-cat="backend">Backend &amp; DB</button>
+      <button class="skill-filter-btn" data-skill-cat="tools">Tools &amp; Cloud</button>
+    </div>
+
+    <div class="skills-grid" id="skillsGrid">
+      <div class="skill-card" data-category="languages">
+        <h3>💻 Programming Languages</h3>
         <div class="tags">
-          <span class="tag">Python</span><span class="tag">Java</span><span class="tag">SQL</span>
-          <span class="tag">JavaScript</span><span class="tag">C++</span><span class="tag">HTML</span><span class="tag">CSS</span>
+          <span class="tag tag-accent">Python</span>
+          <span class="tag">Java</span>
+          <span class="tag">SQL</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">C++</span>
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
         </div>
       </div>
-      <div class="skill-card">
+
+      <div class="skill-card" data-category="data-eng">
         <h3>⚡ Data Engineering</h3>
         <div class="tags">
-          <span class="tag">Apache Spark (PySpark)</span><span class="tag">Hadoop</span>
-          <span class="tag">Snowflake</span><span class="tag">ETL Pipelines</span>
-          <span class="tag">Data Pipelines</span><span class="tag">Data Warehousing</span>
+          <span class="tag tag-accent">Apache Spark (PySpark)</span>
+          <span class="tag tag-accent">Snowflake</span>
+          <span class="tag">ETL Pipelines</span>
+          <span class="tag">Data Warehousing</span>
+          <span class="tag">Hadoop</span>
+          <span class="tag">Data Modeling</span>
+          <span class="tag">Data Ingestion</span>
         </div>
       </div>
-      <div class="skill-card">
+
+      <div class="skill-card" data-category="aiml">
         <h3>🤖 Machine Learning &amp; AI</h3>
         <div class="tags">
-          <span class="tag">TensorFlow</span><span class="tag">Scikit-Learn</span>
-          <span class="tag">Computer Vision (OpenCV)</span><span class="tag">2D-FFT Signal Processing</span>
-          <span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span>
-          <span class="tag">SciPy</span><span class="tag">Feature Engineering</span>
+          <span class="tag tag-accent">TensorFlow</span>
+          <span class="tag">Scikit-Learn</span>
+          <span class="tag">Computer Vision (OpenCV)</span>
+          <span class="tag">2D-FFT Signal Processing</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">SciPy</span>
+          <span class="tag">Feature Engineering</span>
         </div>
       </div>
-      <div class="skill-card">
-        <h3>🌐 Backend &amp; Databases</h3>
+
+      <div class="skill-card" data-category="backend">
+        <h3>🌐 Backend Systems &amp; Databases</h3>
         <div class="tags">
-          <span class="tag">Flask</span><span class="tag">Django</span><span class="tag">REST APIs</span>
-          <span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span>
+          <span class="tag tag-accent">Django</span>
+          <span class="tag tag-accent">Flask</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MongoDB</span>
         </div>
       </div>
-      <div class="skill-card">
-        <h3>🛠️ Tools &amp; Environment</h3>
+
+      <div class="skill-card" data-category="tools">
+        <h3>🛠️ Developer Tools &amp; Cloud</h3>
         <div class="tags">
-          <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Docker</span>
-          <span class="tag">Linux</span><span class="tag">Postman</span><span class="tag">Jupyter Notebook</span>
+          <span class="tag tag-accent">Git &amp; GitHub</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Vercel</span>
+          <span class="tag">Render</span>
+          <span class="tag">Databricks</span>
+          <span class="tag">Postman</span>
+          <span class="tag">Linux / Bash</span>
+          <span class="tag">GitHub Actions CI/CD</span>
         </div>
       </div>
-      <div class="skill-card">
-        <h3>☁️ Cloud &amp; Platforms</h3>
+
+      <div class="skill-card" data-category="languages">
+        <h3>📚 Core Computer Science</h3>
         <div class="tags">
-          <span class="tag">Vercel</span><span class="tag">Render Cloud</span>
-          <span class="tag">Databricks</span><span class="tag">GitHub Actions CI/CD</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <h3>📚 Core CS Subjects</h3>
-        <div class="tags">
-          <span class="tag">Data Structures &amp; Algorithms</span><span class="tag">Operating Systems</span>
-          <span class="tag">Design &amp; Analysis of Algorithms</span><span class="tag">DBMS</span>
-          <span class="tag">Computer Networks</span><span class="tag">Object-Oriented Programming</span>
+          <span class="tag tag-accent">Data Structures &amp; Algorithms</span>
+          <span class="tag">Operating Systems</span>
+          <span class="tag">DBMS</span>
+          <span class="tag">Computer Networks</span>
+          <span class="tag">OOP Design</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Projects ===== -->
+  <!-- ===== Projects Section ===== -->
   <section class="section" id="projects">
     <h2 class="section-title"><span class="section-num">03.</span> Featured Projects</h2>
-    <div class="projects-grid">
 
-      <article class="project-card featured">
+    <!-- Project Filter Tabs -->
+    <div class="project-filter-wrapper">
+      <button class="proj-filter-btn active" data-filter="all">All Projects</button>
+      <button class="proj-filter-btn" data-filter="aiml">AI &amp; ML</button>
+      <button class="proj-filter-btn" data-filter="data-eng">Data &amp; Automation</button>
+      <button class="proj-filter-btn" data-filter="web">Web &amp; Backend</button>
+    </div>
+
+    <div class="projects-grid" id="projectsGrid">
+
+      <article class="project-card featured" data-proj-cat="aiml">
         <div class="project-header">
-          <span class="project-icon">🛡️</span>
+          <div class="project-badge-row">
+            <span class="project-icon">🛡️</span>
+            <span class="status-badge badge-live">● Live on Render</span>
+          </div>
           <div class="project-links">
-            <a href="https://github.com/ayushpandey3357/VideoAuthenticator" target="_blank" rel="noopener" aria-label="GitHub repo" title="GitHub Repository">
+            <a href="https://github.com/ayushpandey3357/VideoAuthenticator" target="_blank" rel="noopener" aria-label="GitHub Repository" title="GitHub Repository">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3z"/></svg>
             </a>
             <a href="https://videoauthenticator.onrender.com/video/" target="_blank" rel="noopener" aria-label="Live Demo" title="Live Demo">
@@ -200,20 +386,26 @@
         </div>
         <h3 class="project-title">VideoAuthenticator — AI Media Forensic Engine</h3>
         <p class="project-desc">
-          Built an OpenCV &amp; 2D-FFT signal processing engine to detect AI video and face-swap artifacts. Extracted PRNU camera noise residuals and Laplacian blur metrics to compute AI likelihood scores, served live via a Django app on Render with Gunicorn &amp; WSGI.
+          Engineered an OpenCV &amp; 2D-FFT signal processing pipeline to detect AI synthetic video manipulation and face-swap artifacts. Extracted PRNU camera noise residuals and Laplacian blur metrics to compute AI confidence scores, deployed live on Render with Django &amp; Gunicorn WSGI.
         </p>
         <div class="tags">
-          <span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">2D-FFT</span>
-          <span class="tag">SciPy</span><span class="tag">NumPy</span><span class="tag">Django</span>
+          <span class="tag">Python</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">2D-FFT</span>
+          <span class="tag">SciPy</span>
+          <span class="tag">Django</span>
           <span class="tag">Render</span>
         </div>
       </article>
 
-      <article class="project-card featured">
+      <article class="project-card featured" data-proj-cat="aiml">
         <div class="project-header">
-          <span class="project-icon">🌾</span>
+          <div class="project-badge-row">
+            <span class="project-icon">🌾</span>
+            <span class="status-badge badge-live">● Live on Vercel</span>
+          </div>
           <div class="project-links">
-            <a href="https://github.com/ayushpandey3357/KRISHIMITR" target="_blank" rel="noopener" aria-label="GitHub repo" title="GitHub Repository">
+            <a href="https://github.com/ayushpandey3357/KRISHIMITR" target="_blank" rel="noopener" aria-label="GitHub Repository" title="GitHub Repository">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3z"/></svg>
             </a>
             <a href="https://krishimitr-three.vercel.app/" target="_blank" rel="noopener" aria-label="Live Demo" title="Live Demo">
@@ -223,70 +415,89 @@
         </div>
         <h3 class="project-title">Krishi-Mitra — AI Agricultural Guidance Platform</h3>
         <p class="project-desc">
-          Built a TensorFlow-based CNN model achieving ~90% accuracy for crop disease detection. Integrated Weather API, LLM API, and Hindi voice support for real-time agricultural guidance, deployed live on Vercel.
+          Developed a TensorFlow Deep CNN model achieving ~90% accuracy for automated crop disease detection. Integrated real-time Weather API, LLM advisor endpoints, and Hindi voice speech interaction for accessible farmer guidance.
         </p>
         <div class="tags">
-          <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">CNN</span>
-          <span class="tag">Flask</span><span class="tag">MySQL</span><span class="tag">LLM API</span>
+          <span class="tag">Python</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">CNN</span>
+          <span class="tag">Flask</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">LLM API</span>
           <span class="tag">Vercel</span>
         </div>
       </article>
 
-      <article class="project-card featured">
+      <article class="project-card featured" data-proj-cat="aiml">
         <div class="project-header">
-          <span class="project-icon">📦</span>
+          <div class="project-badge-row">
+            <span class="project-icon">📦</span>
+            <span class="status-badge badge-intern">🏆 Infosys Springboard</span>
+          </div>
           <div class="project-links">
-            <a href="https://github.com/springboardmentor123455-maker/Packaging-Recommendation-System" target="_blank" rel="noopener" aria-label="GitHub repo" title="GitHub Repository">
+            <a href="https://github.com/springboardmentor123455-maker/Packaging-Recommendation-System" target="_blank" rel="noopener" aria-label="GitHub Repository" title="GitHub Repository">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3z"/></svg>
             </a>
           </div>
         </div>
         <h3 class="project-title">EcoPackAI — Packaging Recommendation System</h3>
         <p class="project-desc">
-          An AI-driven packaging recommendation web app built during the Infosys Springboard Internship. Performed extensive data preprocessing, feature engineering, and model training in Python served through a Flask REST API.
+          AI-driven recommendation platform created during Infosys Springboard Virtual Internship. Performed end-to-end data preprocessing, feature engineering, and model training in Python, exposing model predictions via a RESTful Flask API.
         </p>
         <div class="tags">
-          <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Scikit-Learn</span>
-          <span class="tag">Pandas</span><span class="tag">Feature Engineering</span>
+          <span class="tag">Python</span>
+          <span class="tag">Flask</span>
+          <span class="tag">Scikit-Learn</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Feature Engineering</span>
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" data-proj-cat="data-eng">
         <div class="project-header">
-          <span class="project-icon">🤖</span>
+          <div class="project-badge-row">
+            <span class="project-icon">🤖</span>
+            <span class="status-badge badge-auto">⚡ Automated Bot</span>
+          </div>
           <div class="project-links">
-            <a href="https://github.com/ayushpandey3357/ai-internship-hunter" target="_blank" rel="noopener" aria-label="GitHub repo" title="GitHub Repository">
+            <a href="https://github.com/ayushpandey3357/ai-internship-hunter" target="_blank" rel="noopener" aria-label="GitHub Repository" title="GitHub Repository">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3z"/></svg>
             </a>
           </div>
         </div>
         <h3 class="project-title">AI Internship Hunter</h3>
         <p class="project-desc">
-          An automated pipeline that scrapes internship listings, filters them by relevance,
-          and delivers curated opportunities straight to Telegram. Operates on automated schedule via GitHub Actions.
+          Automated web scraping and filtering engine that monitors tech job boards for relevant SDE &amp; AI internship openings, delivering real-time curated alerts to Telegram using Apify scrapers and scheduled GitHub Actions CI/CD workflows.
         </p>
         <div class="tags">
-          <span class="tag">Python</span><span class="tag">Apify</span><span class="tag">Telegram API</span>
+          <span class="tag">Python</span>
+          <span class="tag">Apify Scraper</span>
+          <span class="tag">Telegram API</span>
           <span class="tag">GitHub Actions</span>
         </div>
       </article>
 
-      <article class="project-card">
+      <article class="project-card" data-proj-cat="web">
         <div class="project-header">
-          <span class="project-icon">🎬</span>
+          <div class="project-badge-row">
+            <span class="project-icon">🎬</span>
+            <span class="status-badge badge-web">🌐 Web App</span>
+          </div>
           <div class="project-links">
-            <a href="https://github.com/ayushpandey3357/movie-recommender" target="_blank" rel="noopener" aria-label="GitHub repo" title="GitHub Repository">
+            <a href="https://github.com/ayushpandey3357/movie-recommender" target="_blank" rel="noopener" aria-label="GitHub Repository" title="GitHub Repository">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3z"/></svg>
             </a>
           </div>
         </div>
-        <h3 class="project-title">Movie Recommendation System</h3>
+        <h3 class="project-title">Movie Recommendation Engine</h3>
         <p class="project-desc">
-          An interactive recommendation web app fetching live movie metadata, poster graphics, and rating scores through REST APIs with a responsive UI.
+          Interactive web application displaying personalized movie recommendations by connecting to live TMDB API endpoints, rendering poster graphics, ratings, and genre metadata with a fast, dynamic responsive UI.
         </p>
         <div class="tags">
-          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML5 / CSS3</span>
           <span class="tag">REST APIs</span>
+          <span class="tag">Fetch API</span>
         </div>
       </article>
 
@@ -301,16 +512,22 @@
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h3>Infosys Springboard Virtual Internship – AI Domain</h3>
-          <p class="timeline-org">Infosys Springboard · Nov 2025 – Jan 2026</p>
-          <p>
-            • Completed intensive training modules in Artificial Intelligence, Machine Learning, and Data Analysis.<br />
-            • Built and deployed <strong>EcoPackAI</strong>, an AI-driven packaging recommendation system utilizing ML models and Flask REST APIs.<br />
-            • Executed end-to-end data preprocessing, feature engineering, and dataset preparation for optimal model performance.
-          </p>
+          <div class="timeline-header">
+            <h3>Infosys Springboard Virtual Internship – AI Domain</h3>
+            <span class="timeline-date">Nov 2025 – Jan 2026</span>
+          </div>
+          <p class="timeline-org">Infosys Springboard · Remote</p>
+          <ul class="timeline-bullets">
+            <li>Completed intensive curriculum in Artificial Intelligence, Machine Learning, and Feature Engineering.</li>
+            <li>Built and deployed <strong>EcoPackAI</strong>, an AI-driven packaging recommendation system utilizing ML classification models and Flask REST APIs.</li>
+            <li>Executed end-to-end data preprocessing, feature engineering, and dataset validation for production pipeline accuracy.</li>
+          </ul>
           <div class="tags">
-            <span class="tag">Artificial Intelligence</span><span class="tag">Machine Learning</span>
-            <span class="tag">Feature Engineering</span><span class="tag">Python</span><span class="tag">Flask</span>
+            <span class="tag">Artificial Intelligence</span>
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Feature Engineering</span>
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
           </div>
         </div>
       </div>
@@ -318,14 +535,21 @@
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h3>B.Tech — Computer Science &amp; Engineering</h3>
-          <p class="timeline-org">Babu Banarasi Das Northern India Institute of Technology (BBDNIIT) · Oct 2023 – Jun 2027</p>
-          <p>
-            Pursuing Bachelor of Technology in CSE. Relevant coursework includes Operating Systems, Data Structures, Design and Analysis of Algorithms, Artificial Intelligence, Machine Learning, Computer Networks, and DBMS.
-          </p>
+          <div class="timeline-header">
+            <h3>B.Tech — Computer Science &amp; Engineering</h3>
+            <span class="timeline-date">Oct 2023 – Jun 2027</span>
+          </div>
+          <p class="timeline-org">Babu Banarasi Das Northern India Institute of Technology (BBDNIIT), Lucknow</p>
+          <ul class="timeline-bullets">
+            <li>Pursuing Bachelor of Technology in CSE with core focus on AI/ML and Data Systems.</li>
+            <li>Key Coursework: Data Structures &amp; Algorithms, Operating Systems, DBMS, Computer Networks, Design &amp; Analysis of Algorithms, Object-Oriented Programming.</li>
+          </ul>
           <div class="tags">
-            <span class="tag">Data Structures &amp; Algorithms</span><span class="tag">Operating Systems</span>
-            <span class="tag">DBMS</span><span class="tag">AI/ML</span><span class="tag">Computer Networks</span>
+            <span class="tag">Data Structures &amp; Algorithms</span>
+            <span class="tag">Operating Systems</span>
+            <span class="tag">DBMS</span>
+            <span class="tag">AI/ML</span>
+            <span class="tag">Computer Networks</span>
           </div>
         </div>
       </div>
@@ -396,7 +620,7 @@
     </div>
   </section>
 
-  <!-- ===== LeetCode & Coding Profile ===== -->
+  <!-- ===== DSA Profiles Section ===== -->
   <section class="section" id="leetcode">
     <h2 class="section-title"><span class="section-num">06.</span> Competitive Programming &amp; DSA Profiles</h2>
     <div class="leetcode-container">
@@ -473,69 +697,84 @@
         <div class="gfg-stats-card">
           <div class="leetcode-card-header">
             <div class="leetcode-user-info">
-              <svg viewBox="0 0 24 24" width="34" height="34" class="gfg-logo-icon" fill="#00E676"><path d="M21.45 14.315c-.143.28-.334.532-.565.745a3.691 3.691 0 0 1-1.104.695 4.51 4.51 0 0 1-3.116-.016 3.79 3.79 0 0 1-2.135-2.078 3.571 3.571 0 0 1-.13-.353h7.418a4.26 4.26 0 0 1-.368 1.008zm-11.99-.654a3.793 3.793 0 0 1-2.134 2.078 4.51 4.51 0 0 1-3.117.016 3.7 3.7 0 0 1-1.104-.695 2.652 2.652 0 0 1-.564-.745 4.221 4.221 0 0 1-.368-1.006H9.59c-.038.12-.08.238-.13.352zm14.501-1.758a3.849 3.849 0 0 0-.082-.475l-9.634-.008a3.932 3.932 0 0 1 1.143-2.348c.363-.35.79-.625 1.26-.809a3.97 3.97 0 0 1 4.484.957l1.521-1.49a5.7 5.7 0 0 0-1.922-1.357 6.283 6.283 0 0 0-2.544-.49 6.35 6.35 0 0 0-2.405.457 6.007 6.007 0 0 0-1.905 1.252 5.922 5.922 0 0 0-1.272 1.879 5.67 5.67 0 0 0-.462 2.32 5.56 5.56 0 0 0 .476 2.316 6.02 6.02 0 0 0 1.282 1.867 6.082 6.082 0 0 0 1.907 1.238 6.376 6.376 0 0 0 2.392.446 6.223 6.223 0 0 0 2.583-.526 5.617 5.617 0 0 0 1.942-1.433l-1.579-1.431a3.882 3.882 0 0 1-1.274.877 4.092 4.092 0 0 1-1.67.332 4.043 4.043 0 0 1-1.549-.29 3.81 3.81 0 0 1-1.237-.817 3.96 3.96 0 0 1-.806-1.237 4.195 4.195 0 0 1-.274-1.127h18.349a4.42 4.42 0 0 0-.001-.48z"/></svg>
+              <svg viewBox="0 0 60 30" width="38" height="22" class="gfg-logo-icon" fill="#00E676"><path d="M59.033 13.628H34.626a9.748 9.748 0 0 1 17.129-5.146l3.55-3.57a14.77 14.77 0 0 0-25.724 8.716h-.085a14.77 14.77 0 0 0-25.724-8.716l3.55 3.57a9.748 9.748 0 0 1 17.129 5.146H.043q-.043.565-.044 1.141a14.771 14.771 0 0 0 29.149 3.383h.778a14.769 14.769 0 0 0 29.149-3.383q-.041-.576-.085-1.141ZM14.769 24.517a9.749 9.749 0 0 1-9.151-6.385h18.3a9.75 9.75 0 0 1-9.149 6.385Zm29.538 0a9.75 9.75 0 0 1-9.152-6.385h18.3a9.75 9.75 0 0 1-9.148 6.385Z"/></svg>
               <div>
-                <h3 class="leetcode-username">GeeksforGeeks Profile</h3>
+                <h3 class="leetcode-username">GeeksforGeeks</h3>
                 <span class="gfg-handle">@ayushpan50qt</span>
               </div>
             </div>
-            <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" rel="noopener" class="btn btn-outline btn-sm btn-gfg">
-              View Profile ↗
-            </a>
+            <div class="gfg-header-right">
+              <span class="gfg-live-indicator" id="gfg-status-badge"><span class="pulse-dot gfg-dot"></span> Live Sync</span>
+              <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" rel="noopener" class="btn btn-outline btn-sm btn-gfg">
+                View Profile ↗
+              </a>
+            </div>
           </div>
 
-          <div class="leetcode-metrics-wrapper">
+          <div class="leetcode-metrics-wrapper gfg-metrics-wrapper">
             <div class="leetcode-main-counter gfg-main-counter">
-              <span class="counter-num gfg-counter-num" id="gfg-total-solved">21+</span>
-              <span class="counter-label">GFG Solved</span>
-              <div class="leetcode-rank-tag gfg-rank-tag" id="gfg-active-days">15+ Days Streak</div>
+              <span class="counter-num gfg-counter-num" id="gfg-total-solved" data-target="21">21</span>
+              <span class="counter-label">Problems Solved</span>
+              <div class="leetcode-rank-tag gfg-rank-tag" id="gfg-institute-rank">Campus Rank: #143</div>
             </div>
 
-            <div class="leetcode-bars">
-              <div class="lc-bar-item gfg-easy">
-                <div class="lc-bar-header">
-                  <span>Basic / School</span>
-                  <span>10 Problems</span>
+            <div class="gfg-stats-breakdown">
+              <div class="gfg-mini-stats-grid">
+                <div class="gfg-mini-stat-card">
+                  <span class="mini-stat-label">Coding Score</span>
+                  <span class="mini-stat-val gfg-accent" id="gfg-coding-score">58</span>
                 </div>
-                <div class="lc-progress-bg">
-                  <div class="lc-progress-fill gfg-easy-fill" style="width: 50%"></div>
+                <div class="gfg-mini-stat-card">
+                  <span class="mini-stat-label">Monthly Score</span>
+                  <span class="mini-stat-val" id="gfg-monthly-score">19</span>
+                </div>
+                <div class="gfg-mini-stat-card">
+                  <span class="mini-stat-label">College</span>
+                  <span class="mini-stat-val" title="BBDNIIT Lucknow" id="gfg-college">BBDNIIT</span>
+                </div>
+                <div class="gfg-mini-stat-card">
+                  <span class="mini-stat-label">Streak Record</span>
+                  <span class="mini-stat-val gfg-accent" id="gfg-streak">1+ Day</span>
                 </div>
               </div>
 
-              <div class="lc-bar-item gfg-medium">
-                <div class="lc-bar-header">
-                  <span>Medium Level</span>
-                  <span>8 Problems</span>
+              <div class="leetcode-bars gfg-bars" style="margin-top: 0.8rem;">
+                <div class="lc-bar-item gfg-easy">
+                  <div class="lc-bar-header">
+                    <span>School &amp; Basic</span>
+                    <span id="gfg-easy-count">14 Problems</span>
+                  </div>
+                  <div class="lc-progress-bg">
+                    <div class="lc-progress-fill gfg-easy-fill" id="gfg-easy-bar" style="width: 66%"></div>
+                  </div>
                 </div>
-                <div class="lc-progress-bg">
-                  <div class="lc-progress-fill gfg-medium-fill" style="width: 40%"></div>
-                </div>
-              </div>
 
-              <div class="lc-bar-item gfg-hard">
-                <div class="lc-bar-header">
-                  <span>Hard / Practice</span>
-                  <span>3 Problems</span>
-                </div>
-                <div class="lc-progress-bg">
-                  <div class="lc-progress-fill gfg-hard-fill" style="width: 15%"></div>
+                <div class="lc-bar-item gfg-medium">
+                  <div class="lc-bar-header">
+                    <span>Easy &amp; Medium</span>
+                    <span id="gfg-medium-count">7 Problems</span>
+                  </div>
+                  <div class="lc-progress-bg">
+                    <div class="lc-progress-fill gfg-medium-fill" id="gfg-medium-bar" style="width: 34%"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="leetcode-recent-section">
-            <h4 class="recent-title"><span class="pulse-dot gfg-dot"></span> Core Practice Topics</h4>
+            <h4 class="recent-title"><span class="pulse-dot gfg-dot"></span> Core Practice Topics &amp; Algorithms</h4>
             <div class="recent-sub-tags">
               <span class="sub-tag gfg-tag">Arrays &amp; Strings <small>C++ / Java</small></span>
-              <span class="sub-tag gfg-tag">Trees &amp; Search <small>Java</small></span>
+              <span class="sub-tag gfg-tag">Binary Trees <small>Java</small></span>
               <span class="sub-tag gfg-tag">Dynamic Programming <small>Python</small></span>
-              <span class="sub-tag gfg-tag">Graph Algorithms <small>Java</small></span>
+              <span class="sub-tag gfg-tag">Graph Traversal <small>Java</small></span>
+              <span class="sub-tag gfg-tag">Recursion &amp; Backtracking <small>C++</small></span>
             </div>
           </div>
         </div>
 
-        <!-- Symmetrical Bottom Showcase Row -->
+        <!-- Showcase Row -->
         <div class="dsa-showcase-row">
           <div class="leetcode-embed-card">
             <div class="embed-header">
@@ -549,20 +788,27 @@
 
           <div class="gfg-showcase-banner">
             <div class="gfg-banner-content">
-              <h4>
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="#00E676"><path d="M21.45 14.315c-.143.28-.334.532-.565.745a3.691 3.691 0 0 1-1.104.695 4.51 4.51 0 0 1-3.116-.016 3.79 3.79 0 0 1-2.135-2.078 3.571 3.571 0 0 1-.13-.353h7.418a4.26 4.26 0 0 1-.368 1.008zm-11.99-.654a3.793 3.793 0 0 1-2.134 2.078 4.51 4.51 0 0 1-3.117.016 3.7 3.7 0 0 1-1.104-.695 2.652 2.652 0 0 1-.564-.745 4.221 4.221 0 0 1-.368-1.006H9.59c-.038.12-.08.238-.13.352zm14.501-1.758a3.849 3.849 0 0 0-.082-.475l-9.634-.008a3.932 3.932 0 0 1 1.143-2.348c.363-.35.79-.625 1.26-.809a3.97 3.97 0 0 1 4.484.957l1.521-1.49a5.7 5.7 0 0 0-1.922-1.357 6.283 6.283 0 0 0-2.544-.49 6.35 6.35 0 0 0-2.405.457 6.007 6.007 0 0 0-1.905 1.252 5.922 5.922 0 0 0-1.272 1.879 5.67 5.67 0 0 0-.462 2.32 5.56 5.56 0 0 0 .476 2.316 6.02 6.02 0 0 0 1.282 1.867 6.082 6.082 0 0 0 1.907 1.238 6.376 6.376 0 0 0 2.392.446 6.223 6.223 0 0 0 2.583-.526 5.617 5.617 0 0 0 1.942-1.433l-1.579-1.431a3.882 3.882 0 0 1-1.274.877 4.092 4.092 0 0 1-1.67.332 4.043 4.043 0 0 1-1.549-.29 3.81 3.81 0 0 1-1.237-.817 3.96 3.96 0 0 1-.806-1.237 4.195 4.195 0 0 1-.274-1.127h18.349a4.42 4.42 0 0 0-.001-.48z"/></svg>
-                GeeksforGeeks Activity &amp; Practice
-              </h4>
-              <p>Active practice on GeeksforGeeks solving Data Structures &amp; Algorithms challenges in C++, Java &amp; Python.</p>
+              <div class="embed-header" style="margin-bottom: 0.6rem;">
+                <h4 style="margin: 0; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                  <svg viewBox="0 0 60 30" width="28" height="16" fill="#00E676"><path d="M59.033 13.628H34.626a9.748 9.748 0 0 1 17.129-5.146l3.55-3.57a14.77 14.77 0 0 0-25.724 8.716h-.085a14.77 14.77 0 0 0-25.724-8.716l3.55 3.57a9.748 9.748 0 0 1 17.129 5.146H.043q-.043.565-.044 1.141a14.771 14.771 0 0 0 29.149 3.383h.778a14.769 14.769 0 0 0 29.149-3.383q-.041-.576-.085-1.141ZM14.769 24.517a9.749 9.749 0 0 1-9.151-6.385h18.3a9.75 9.75 0 0 1-9.149 6.385Zm29.538 0a9.75 9.75 0 0 1-9.152-6.385h18.3a9.75 9.75 0 0 1-9.148 6.385Z"/></svg>
+                  GeeksforGeeks Profile Activity
+                </h4>
+                <span class="live-dot gfg-live-badge" style="color: #00E676; background: rgba(0, 230, 118, 0.1); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem;">● Active</span>
+              </div>
+              <p style="margin-top: 0.6rem;">Active problem solving on GeeksforGeeks mastering Data Structures &amp; Algorithms in C++, Java &amp; Python.</p>
               
               <div class="gfg-banner-highlights">
                 <div class="gfg-highlight-item">
-                  <span class="gfg-hl-num">200+</span>
-                  <span class="gfg-hl-label">Total DSA Solved</span>
+                  <span class="gfg-hl-num" id="gfg-banner-solved">21+</span>
+                  <span class="gfg-hl-label">Problems Solved</span>
                 </div>
                 <div class="gfg-highlight-item">
-                  <span class="gfg-hl-num">Active</span>
-                  <span class="gfg-hl-label">Coding Status</span>
+                  <span class="gfg-hl-num" id="gfg-banner-score">58</span>
+                  <span class="gfg-hl-label">Coding Score</span>
+                </div>
+                <div class="gfg-highlight-item">
+                  <span class="gfg-hl-num" id="gfg-banner-rank">#143</span>
+                  <span class="gfg-hl-label">Institute Rank</span>
                 </div>
               </div>
             </div>
@@ -577,7 +823,7 @@
     </div>
   </section>
 
-  <!-- ===== Contact ===== -->
+  <!-- ===== Contact Section ===== -->
   <section class="section contact-section" id="contact">
     <h2 class="section-title centered"><span class="section-num">07.</span> Get In Touch</h2>
     <p class="contact-text">
@@ -585,33 +831,72 @@
       Whether you have an opening, a question, or just want to connect — feel free to reach out!
     </p>
 
+    <!-- Quick Copy Contact Pills -->
     <div class="contact-info-pills">
-      <span class="contact-pill">📍 Lucknow, India</span>
-      <a href="tel:+919336338906" class="contact-pill">📞 +91-9336338906</a>
-      <a href="mailto:ayushpandey1974@gmail.com" class="contact-pill">✉️ ayushpandey1974@gmail.com</a>
+      <button class="contact-pill copy-pill" data-copy="ayushpandey1974@gmail.com" title="Click to copy email">
+        <span>✉️ ayushpandey1974@gmail.com</span>
+        <small class="copy-badge">Copy 📋</small>
+      </button>
+      <button class="contact-pill copy-pill" data-copy="+919336338906" title="Click to copy phone number">
+        <span>📞 +91-9336338906</span>
+        <small class="copy-badge">Copy 📋</small>
+      </button>
+      <span class="contact-pill">📍 Lucknow, UP, India</span>
     </div>
 
-    <a href="mailto:ayushpandey1974@gmail.com" class="btn btn-primary btn-lg">Say Hello 👋</a>
+    <!-- Contact Form Container -->
+    <div class="contact-form-container">
+      <form id="contact-form" class="contact-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="contact-name">Your Name</label>
+            <input type="text" id="contact-name" name="name" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Your Email</label>
+            <input type="email" id="contact-email" name="email" placeholder="john@example.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contact-subject">Subject</label>
+          <input type="text" id="contact-subject" name="subject" placeholder="Internship Opportunity / Inquiry" required />
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" rows="4" placeholder="Hi Ayush, I'd like to talk about..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg form-submit-btn">Send Message 🚀</button>
+      </form>
+    </div>
 
     <div class="hero-socials contact-socials">
-      <a href="https://github.com/ayushpandey3357" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub Profile">
+      <a href="https://github.com/ayushpandey3357" target="_blank" rel="noopener" aria-label="GitHub Profile" title="GitHub Profile">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3z"/></svg>
       </a>
-      <a href="https://linkedin.com/in/ayushpandey3357" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn Profile">
+      <a href="https://linkedin.com/in/ayushpandey3357" target="_blank" rel="noopener" aria-label="LinkedIn Profile" title="LinkedIn Profile">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.4V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.3zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zm1.8 13.1H3.5V9h3.6v11.5zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 1 .8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7c0-1-.8-1.7-1.8-1.7z"/></svg>
       </a>
-      <a href="https://leetcode.com/u/P5Dtti61ig/" target="_blank" rel="noopener" aria-label="LeetCode" title="LeetCode Profile">
+      <a href="https://leetcode.com/u/P5Dtti61ig/" target="_blank" rel="noopener" aria-label="LeetCode Profile" title="LeetCode Profile">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
       </a>
-      <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" rel="noopener" aria-label="GeeksforGeeks" title="GeeksforGeeks Profile">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21.45 14.315c-.143.28-.334.532-.565.745a3.691 3.691 0 0 1-1.104.695 4.51 4.51 0 0 1-3.116-.016 3.79 3.79 0 0 1-2.135-2.078 3.571 3.571 0 0 1-.13-.353h7.418a4.26 4.26 0 0 1-.368 1.008zm-11.99-.654a3.793 3.793 0 0 1-2.134 2.078 4.51 4.51 0 0 1-3.117.016 3.7 3.7 0 0 1-1.104-.695 2.652 2.652 0 0 1-.564-.745 4.221 4.221 0 0 1-.368-1.006H9.59c-.038.12-.08.238-.13.352zm14.501-1.758a3.849 3.849 0 0 0-.082-.475l-9.634-.008a3.932 3.932 0 0 1 1.143-2.348c.363-.35.79-.625 1.26-.809a3.97 3.97 0 0 1 4.484.957l1.521-1.49a5.7 5.7 0 0 0-1.922-1.357 6.283 6.283 0 0 0-2.544-.49 6.35 6.35 0 0 0-2.405.457 6.007 6.007 0 0 0-1.905 1.252 5.922 5.922 0 0 0-1.272 1.879 5.67 5.67 0 0 0-.462 2.32 5.56 5.56 0 0 0 .476 2.316 6.02 6.02 0 0 0 1.282 1.867 6.082 6.082 0 0 0 1.907 1.238 6.376 6.376 0 0 0 2.392.446 6.223 6.223 0 0 0 2.583-.526 5.617 5.617 0 0 0 1.942-1.433l-1.579-1.431a3.882 3.882 0 0 1-1.274.877 4.092 4.092 0 0 1-1.67.332 4.043 4.043 0 0 1-1.549-.29 3.81 3.81 0 0 1-1.237-.817 3.96 3.96 0 0 1-.806-1.237 4.195 4.195 0 0 1-.274-1.127h18.349a4.42 4.42 0 0 0-.001-.48z"/></svg>
+      <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" rel="noopener" aria-label="GeeksforGeeks Profile" title="GeeksforGeeks Profile">
+        <svg viewBox="0 0 60 30" width="24" height="24" fill="currentColor"><path d="M59.033 13.628H34.626a9.748 9.748 0 0 1 17.129-5.146l3.55-3.57a14.77 14.77 0 0 0-25.724 8.716h-.085a14.77 14.77 0 0 0-25.724-8.716l3.55 3.57a9.748 9.748 0 0 1 17.129 5.146H.043q-.043.565-.044 1.141a14.771 14.771 0 0 0 29.149 3.383h.778a14.769 14.769 0 0 0 29.149-3.383q-.041-.576-.085-1.141ZM14.769 24.517a9.749 9.749 0 0 1-9.151-6.385h18.3a9.75 9.75 0 0 1-9.149 6.385Zm29.538 0a9.75 9.75 0 0 1-9.152-6.385h18.3a9.75 9.75 0 0 1-9.148 6.385Z"/></svg>
       </a>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="footer">
-    <p>Designed &amp; Built by Ayush Kumar Pandey · © 2026</p>
+    <p>Designed &amp; Built with ❤️ by Ayush Kumar Pandey · © 2026</p>
   </footer>
+
+  <!-- Floating Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Scroll back to top" title="Back to Top">
+    <svg class="progress-ring" width="46" height="46">
+      <circle class="progress-ring-circle" stroke="currentColor" stroke-width="3" fill="transparent" r="18" cx="23" cy="23"/>
+    </svg>
+    <span class="arrow">↑</span>
+  </button>
 
   <script src="script.js"></script>
 </body>

@@ -251,7 +251,7 @@ function initInteractiveTerminal() {
     help: 'Available commands: <span class="term-cmd">skills</span>, <span class="term-cmd">projects</span>, <span class="term-cmd">gfg</span>, <span class="term-cmd">leetcode</span>, <span class="term-cmd">contact</span>, <span class="term-cmd">about</span>, <span class="term-cmd">github</span>, <span class="term-cmd">linkedin</span>, <span class="term-cmd">clear</span>',
     skills: '⚡ Core Stack: Python, PySpark, Snowflake, TensorFlow, OpenCV, Django, Flask, MySQL, Docker',
     projects: '🚀 Featured Projects: VideoAuthenticator (AI Media Forensics), Krishi-Mitra (AI Crop Disease Detector), EcoPackAI, AI Internship Hunter',
-    contact: '✉️ Email: ayushpandey1974@gmail.com | 📞 Phone: +91-9336338906 | 📍 Location: Lucknow, India',
+    contact: '✉️ Email: <a href="mailto:ayushpandey1974@gmail.com" style="color:var(--accent)">ayushpandey1974@gmail.com</a> | 📞 Phone: <a href="tel:+919336338906" style="color:var(--accent)">+91-9336338906</a> | 📍 Location: Lucknow, India',
     about: '🎓 B.Tech CSE Student @ BBDNIIT (2023-2027) | Infosys Springboard AI Domain Intern | 200+ Solved DSA Problems',
     github: 'Opening GitHub profile (<a href="https://github.com/ayushpandey3357" target="_blank" style="color:var(--accent)">github.com/ayushpandey3357</a>)...',
     linkedin: 'Opening LinkedIn profile (<a href="https://linkedin.com/in/ayushpandey3357" target="_blank" style="color:var(--accent)">linkedin.com/in/ayushpandey3357</a>)...',
@@ -395,11 +395,13 @@ function initCategoryFilters() {
 
 /* ================= 8. Contact Form & Copy Actions ================= */
 function initContactAndCopy() {
-  // Copy Pills
-  const copyPills = document.querySelectorAll('.copy-pill');
-  copyPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      const textToCopy = pill.getAttribute('data-copy');
+  // Copy Buttons / Badges
+  const copyElements = document.querySelectorAll('[data-copy]');
+  copyElements.forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const textToCopy = el.getAttribute('data-copy');
       if (textToCopy) {
         navigator.clipboard.writeText(textToCopy).then(() => {
           showToast(`Copied "${textToCopy}" to clipboard! 📋`, 'success');

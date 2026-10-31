@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initImpactCounters();
   initCategoryFilters();
   initGitHubRepositoryGallery();
+  initEditorialProjectArtwork();
   initContactAndCopy();
   initBackToTop();
   fetchLeetCodeStats();
@@ -22,7 +23,7 @@ function initThemeToggle() {
 
   // Load saved theme or system preference
   const savedTheme = localStorage.getItem('portfolio-theme');
-  const initialTheme = savedTheme || 'dark';
+  const initialTheme = savedTheme || 'light';
 
   htmlElement.setAttribute('data-theme', initialTheme);
 
@@ -88,7 +89,7 @@ function initParticleCanvas() {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = isDark ? 'rgba(57, 255, 20, 0.38)' : 'rgba(17, 125, 52, 0.34)';
+      ctx.fillStyle = isDark ? 'rgba(181, 215, 196, 0.24)' : 'rgba(40, 88, 71, 0.2)';
       ctx.fill();
     }
   }
@@ -116,8 +117,8 @@ function initParticleCanvas() {
           ctx.lineTo(particles[j].x, particles[j].y);
           const opacity = (1 - dist / 130) * 0.15;
           ctx.strokeStyle = isDark
-            ? `rgba(57, 255, 20, ${opacity})`
-            : `rgba(17, 125, 52, ${opacity})`;
+            ? `rgba(181, 215, 196, ${opacity})`
+            : `rgba(40, 88, 71, ${opacity})`;
           ctx.lineWidth = 0.8;
           ctx.stroke();
         }
@@ -764,6 +765,48 @@ function initGitHubRepositoryGallery() {
     applyFilters();
   });
   loadRepositories();
+}
+
+/* ================= 7c. Editorial project cover artwork ================= */
+function initEditorialProjectArtwork() {
+  const curatedGrid = document.getElementById('projectsGrid');
+  const repositoryGrid = document.getElementById('repositoryGrid');
+  if (!curatedGrid || !repositoryGrid) return;
+
+  const categoryClass = category => ({
+    aiml: 'ai-ml',
+    'ai-ml': 'ai-ml',
+    web: 'web-development',
+    'web-development': 'web-development',
+    'data-eng': 'data-engineering',
+    'data-engineering': 'data-engineering',
+    'python-automation': 'python-automation',
+    other: 'other'
+  })[category] || 'other';
+
+  function decorate(card) {
+    if (card.querySelector('.project-art')) return;
+    const title = card.querySelector('.project-title')?.textContent.trim() || 'Project';
+    const words = title.split(/[^a-z0-9]+/i).filter(Boolean);
+    const mark = (words.length > 1 ? `${words[0][0]}${words[1][0]}` : title.slice(0, 2)).toUpperCase();
+    const category = categoryClass(card.dataset.repoCategory || card.dataset.projCat || 'other');
+    const artwork = document.createElement('div');
+    artwork.className = `project-art project-art-${category}`;
+    artwork.dataset.mark = mark;
+    artwork.setAttribute('aria-hidden', 'true');
+    card.insertBefore(artwork, card.firstChild);
+  }
+
+  curatedGrid.querySelectorAll('.project-card').forEach(decorate);
+  repositoryGrid.querySelectorAll('.repository-card').forEach(decorate);
+  const observer = new MutationObserver(records => records.forEach(record =>
+    record.addedNodes.forEach(node => {
+      if (node.nodeType !== Node.ELEMENT_NODE) return;
+      if (node.matches('.repository-card')) decorate(node);
+      node.querySelectorAll?.('.repository-card').forEach(decorate);
+    })
+  ));
+  observer.observe(repositoryGrid, { childList: true });
 }
 
 /* ================= 8. Contact Form & Copy Actions ================= */

@@ -85,7 +85,7 @@
           <span>GitHub</span> ↗
         </a>
 
-        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-controls="navMenu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -357,19 +357,35 @@
 
   <!-- ===== Projects Section ===== -->
   <section class="section" id="projects">
-    <h2 class="section-title"><span class="section-num">03.</span> Featured Projects</h2>
+    <h2 class="section-title"><span class="section-num">03.</span> Featured Projects &amp; Repositories</h2>
 
     <!-- Project Filter Tabs -->
     <div class="project-filter-wrapper">
       <button class="proj-filter-btn active" data-filter="all">All Projects</button>
-      <button class="proj-filter-btn" data-filter="aiml">AI &amp; ML</button>
-      <button class="proj-filter-btn" data-filter="data-eng">Data &amp; Automation</button>
-      <button class="proj-filter-btn" data-filter="web">Web &amp; Backend</button>
+      <button class="proj-filter-btn" data-filter="ai-ml">AI &amp; ML</button>
+      <button class="proj-filter-btn" data-filter="web-development">Web Development</button>
+      <button class="proj-filter-btn" data-filter="data-engineering">Data Engineering</button>
+      <button class="proj-filter-btn" data-filter="python-automation">Python &amp; Automation</button>
+      <button class="proj-filter-btn" data-filter="other">Other</button>
+    </div>
+
+    <div class="repository-controls">
+      <label class="project-search-field">
+        <span>Search repositories</span>
+        <input type="search" id="projectSearch" placeholder="Name, description, language, or topic..." autocomplete="off" />
+      </label>
+      <label class="project-technology-field">
+        <span>Technology</span>
+        <select id="projectTechnologyFilter">
+          <option value="all">All technologies</option>
+        </select>
+      </label>
+      <p class="repository-result-count" id="repositoryResultCount" aria-live="polite">Loading GitHub repositories...</p>
     </div>
 
     <div class="projects-grid" id="projectsGrid">
 
-      <article class="project-card featured" data-proj-cat="aiml">
+      <article class="project-card featured" data-proj-cat="ai-ml" data-repo-name="VideoAuthenticator">
         <div class="project-header">
           <div class="project-badge-row">
             <span class="project-icon">🛡️</span>
@@ -398,7 +414,7 @@
         </div>
       </article>
 
-      <article class="project-card featured" data-proj-cat="aiml">
+      <article class="project-card featured" data-proj-cat="ai-ml" data-repo-name="KRISHIMITR">
         <div class="project-header">
           <div class="project-badge-row">
             <span class="project-icon">🌾</span>
@@ -428,7 +444,7 @@
         </div>
       </article>
 
-      <article class="project-card featured" data-proj-cat="aiml">
+      <article class="project-card featured" data-proj-cat="ai-ml" data-repo-name="Packaging-Recommendation-System">
         <div class="project-header">
           <div class="project-badge-row">
             <span class="project-icon">📦</span>
@@ -457,7 +473,7 @@
         </div>
       </article>
 
-      <article class="project-card" data-proj-cat="data-eng">
+      <article class="project-card" data-proj-cat="python-automation" data-repo-name="AI-Internship-Hunter">
         <div class="project-header">
           <div class="project-badge-row">
             <span class="project-icon">🤖</span>
@@ -481,7 +497,7 @@
         </div>
       </article>
 
-      <article class="project-card" data-proj-cat="web">
+      <article class="project-card" data-proj-cat="web-development" data-repo-name="Movie-Recommendation-system">
         <div class="project-header">
           <div class="project-badge-row">
             <span class="project-icon">🎬</span>
@@ -505,6 +521,15 @@
         </div>
       </article>
 
+    </div>
+
+    <div class="repository-gallery-heading">
+      <h3>Complete GitHub Repository Gallery</h3>
+      <span id="repositorySyncLabel">github.com/ayushpandey3357</span>
+    </div>
+    <div class="projects-grid repository-grid" id="repositoryGrid" aria-live="polite"></div>
+    <div class="repository-status" id="repositoryStatus" role="status" aria-live="polite">
+      <span class="repository-status-indicator"></span> Connecting to GitHub...
     </div>
   </section>
 
@@ -717,7 +742,7 @@
 
           <div class="leetcode-metrics-wrapper gfg-metrics-wrapper">
             <div class="leetcode-main-counter gfg-main-counter">
-              <span class="counter-num gfg-counter-num" id="gfg-total-solved" data-target="21">21</span>
+              <span class="counter-num gfg-counter-num" id="gfg-total-solved" data-target="27">27</span>
               <span class="counter-label">Problems Solved</span>
               <div class="leetcode-rank-tag gfg-rank-tag" id="gfg-institute-rank">Campus Rank: #143</div>
             </div>
@@ -745,21 +770,21 @@
               <div class="leetcode-bars gfg-bars" style="margin-top: 0.8rem;">
                 <div class="lc-bar-item gfg-easy">
                   <div class="lc-bar-header">
-                    <span>School &amp; Basic</span>
-                    <span id="gfg-easy-count">14 Problems</span>
+                    <span>School, Basic &amp; Easy</span>
+                    <span id="gfg-easy-count">17 Problems</span>
                   </div>
                   <div class="lc-progress-bg">
-                    <div class="lc-progress-fill gfg-easy-fill" id="gfg-easy-bar" style="width: 66%"></div>
+                    <div class="lc-progress-fill gfg-easy-fill" id="gfg-easy-bar" style="width: 63%"></div>
                   </div>
                 </div>
 
                 <div class="lc-bar-item gfg-medium">
                   <div class="lc-bar-header">
-                    <span>Easy &amp; Medium</span>
-                    <span id="gfg-medium-count">7 Problems</span>
+                    <span>Medium &amp; Hard</span>
+                    <span id="gfg-medium-count">10 Problems</span>
                   </div>
                   <div class="lc-progress-bg">
-                    <div class="lc-progress-fill gfg-medium-fill" id="gfg-medium-bar" style="width: 34%"></div>
+                    <div class="lc-progress-fill gfg-medium-fill" id="gfg-medium-bar" style="width: 37%"></div>
                   </div>
                 </div>
               </div>
@@ -790,35 +815,13 @@
             </a>
           </div>
 
-          <div class="gfg-showcase-banner">
-            <div class="gfg-banner-content">
-              <div class="embed-header" style="margin-bottom: 0.6rem;">
-                <h4 style="margin: 0; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
-                  <svg viewBox="0 0 60 30" width="28" height="16" fill="#00E676"><path d="M59.033 13.628H34.626a9.748 9.748 0 0 1 17.129-5.146l3.55-3.57a14.77 14.77 0 0 0-25.724 8.716h-.085a14.77 14.77 0 0 0-25.724-8.716l3.55 3.57a9.748 9.748 0 0 1 17.129 5.146H.043q-.043.565-.044 1.141a14.771 14.771 0 0 0 29.149 3.383h.778a14.769 14.769 0 0 0 29.149-3.383q-.041-.576-.085-1.141ZM14.769 24.517a9.749 9.749 0 0 1-9.151-6.385h18.3a9.75 9.75 0 0 1-9.149 6.385Zm29.538 0a9.75 9.75 0 0 1-9.152-6.385h18.3a9.75 9.75 0 0 1-9.148 6.385Z"/></svg>
-                  GeeksforGeeks Profile Activity
-                </h4>
-                <span class="live-dot gfg-live-badge" style="color: #00E676; background: rgba(0, 230, 118, 0.1); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem;">● Active</span>
-              </div>
-              <p style="margin-top: 0.6rem;">Active problem solving on GeeksforGeeks mastering Data Structures &amp; Algorithms in C++, Java &amp; Python.</p>
-              
-              <div class="gfg-banner-highlights">
-                <div class="gfg-highlight-item">
-                  <span class="gfg-hl-num" id="gfg-banner-solved">21+</span>
-                  <span class="gfg-hl-label">Problems Solved</span>
-                </div>
-                <div class="gfg-highlight-item">
-                  <span class="gfg-hl-num" id="gfg-banner-score">58</span>
-                  <span class="gfg-hl-label">Coding Score</span>
-                </div>
-                <div class="gfg-highlight-item">
-                  <span class="gfg-hl-num" id="gfg-banner-rank">#143</span>
-                  <span class="gfg-hl-label">Institute Rank</span>
-                </div>
-              </div>
+          <div class="leetcode-embed-card gfg-embed-card">
+            <div class="embed-header">
+              <span>GeeksforGeeks Live Stats Badge</span>
+              <span class="live-dot gfg-live-badge">● Live</span>
             </div>
-
-            <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" rel="noopener" class="btn-gfg-banner">
-              View GeeksforGeeks Profile ↗
+            <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" rel="noopener" class="embed-img-wrapper">
+              <img src="https://gfgstatscard.vercel.app/ayushpan50qt" alt="Ayush's GeeksforGeeks Live Stats" loading="lazy" class="leetcode-widget-img gfg-widget-img" id="gfg-widget-image" />
             </a>
           </div>
         </div>

@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initInteractiveTerminal();
   initImpactCounters();
   initCategoryFilters();
+  initGitHubRepositoryGallery();
   initContactAndCopy();
   initBackToTop();
   fetchLeetCodeStats();
@@ -21,8 +22,7 @@ function initThemeToggle() {
 
   // Load saved theme or system preference
   const savedTheme = localStorage.getItem('portfolio-theme');
-  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+  const initialTheme = savedTheme || 'dark';
 
   htmlElement.setAttribute('data-theme', initialTheme);
 
@@ -42,6 +42,7 @@ function initParticleCanvas() {
   const canvas = document.getElementById('particle-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let width, height;
   let particles = [];
@@ -87,7 +88,7 @@ function initParticleCanvas() {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = isDark ? 'rgba(100, 255, 218, 0.4)' : 'rgba(2, 132, 199, 0.35)';
+      ctx.fillStyle = isDark ? 'rgba(57, 255, 20, 0.38)' : 'rgba(17, 125, 52, 0.34)';
       ctx.fill();
     }
   }
@@ -115,14 +116,14 @@ function initParticleCanvas() {
           ctx.lineTo(particles[j].x, particles[j].y);
           const opacity = (1 - dist / 130) * 0.15;
           ctx.strokeStyle = isDark
-            ? `rgba(100, 255, 218, ${opacity})`
-            : `rgba(2, 132, 199, ${opacity})`;
+            ? `rgba(57, 255, 20, ${opacity})`
+            : `rgba(17, 125, 52, ${opacity})`;
           ctx.lineWidth = 0.8;
           ctx.stroke();
         }
       }
     }
-    requestAnimationFrame(animate);
+    if (!reduceMotion) requestAnimationFrame(animate);
   }
   animate();
 }
@@ -139,6 +140,11 @@ function initTypedText() {
   ];
   const typedEl = document.getElementById('typed');
   if (!typedEl) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    typedEl.textContent = phrases[0];
+    return;
+  }
 
   let phraseIdx = 0, charIdx = 0, deleting = false;
 
@@ -187,12 +193,14 @@ function initNavbarScroll() {
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('open');
       navMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', hamburger.classList.contains('open'));
     });
 
     navMenu.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
         navMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
       });
     });
   }
@@ -205,9 +213,12 @@ function initNavbarScroll() {
     entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          navLinks.forEach(l =>
-            l.classList.toggle('active', l.getAttribute('href') === `#${entry.target.id}`)
-          );
+          navLinks.forEach(l => {
+            const isActive = l.getAttribute('href') === `#${entry.target.id}`;
+            l.classList.toggle('active', isActive);
+            if (isActive) l.setAttribute('aria-current', 'location');
+            else l.removeAttribute('aria-current');
+          });
         }
       });
     },
@@ -217,7 +228,7 @@ function initNavbarScroll() {
 
   // Reveal elements on scroll
   const revealTargets = document.querySelectorAll(
-    '.section-title, .about-grid, .skill-card, .project-card, .timeline-item, .cert-card, .contact-text, .leetcode-stats-card, .gfg-stats-card, .leetcode-embed-card, .gfg-showcase-banner'
+    '.section-title, .about-grid, .skill-card, .project-card, .timeline-item, .cert-card, .contact-text, .leetcode-stats-card, .gfg-stats-card, .leetcode-embed-card, .gfg-embed-card'
   );
   revealTargets.forEach(el => el.classList.add('reveal'));
 
@@ -227,7 +238,7 @@ function initNavbarScroll() {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           if (entry.target.classList.contains('leetcode-stats-card')) {
-            animateLeetCodeCounters();
+            animateSingleCounter('lc-total-solved');
           }
           revealObserver.unobserve(entry.target);
         }
@@ -256,7 +267,7 @@ function initInteractiveTerminal() {
     github: 'Opening GitHub profile (<a href="https://github.com/ayushpandey3357" target="_blank" style="color:var(--accent)">github.com/ayushpandey3357</a>)...',
     linkedin: 'Opening LinkedIn profile (<a href="https://linkedin.com/in/ayushpandey3357" target="_blank" style="color:var(--accent)">linkedin.com/in/ayushpandey3357</a>)...',
     leetcode: '🟠 <b>LeetCode Profile:</b> @P5Dtti61ig | 150+ Problems Solved | Rank: Top 30% | <a href="https://leetcode.com/u/P5Dtti61ig/" target="_blank" style="color:#FFA116">View Profile ↗</a>',
-    gfg: '🟢 <b>GeeksforGeeks Profile:</b> @ayushpan50qt | 21+ Problems Solved | Coding Score: 58 | Campus Rank: #143 (BBDNIIT) | <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" style="color:#00E676">View Profile ↗</a>'
+    gfg: '🟢 <b>GeeksforGeeks Profile:</b> @ayushpan50qt | <span id="term-gfg-solved">27+</span> Problems Solved | Coding Score: 58 | Campus Rank: #143 (BBDNIIT) | <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" style="color:#00E676">View Profile ↗</a>'
   };
 
   function executeCommand(rawCmd) {
@@ -370,27 +381,389 @@ function initCategoryFilters() {
     });
   });
 
-  // Project Filters
-  const projBtns = document.querySelectorAll('.proj-filter-btn');
-  const projCards = document.querySelectorAll('.project-card');
+}
 
-  projBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      projBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+/* ================= 7b. Public GitHub Repository Gallery ================= */
+function initGitHubRepositoryGallery() {
+  const username = 'ayushpandey3357';
+  const cacheKey = `portfolio-repositories-v1-${username}`;
+  const cacheTtl = 30 * 60 * 1000;
+  const curatedGrid = document.getElementById('projectsGrid');
+  const repositoryGrid = document.getElementById('repositoryGrid');
+  const status = document.getElementById('repositoryStatus');
+  const resultCount = document.getElementById('repositoryResultCount');
+  const searchInput = document.getElementById('projectSearch');
+  const technologyFilter = document.getElementById('projectTechnologyFilter');
+  const categoryButtons = document.querySelectorAll('.proj-filter-btn');
+  if (!curatedGrid || !repositoryGrid || !status || !resultCount || !searchInput || !technologyFilter) return;
 
-      const filter = btn.getAttribute('data-filter');
-      projCards.forEach(card => {
-        if (filter === 'all' || card.getAttribute('data-proj-cat') === filter) {
-          card.style.display = 'flex';
-          setTimeout(() => card.style.opacity = '1', 50);
-        } else {
-          card.style.opacity = '0';
-          setTimeout(() => card.style.display = 'none', 250);
+  const curatedCards = [...curatedGrid.querySelectorAll('.project-card')];
+  const featuredRepositoryNames = new Set(['videoauthenticator', 'krishimitr', 'aiinternshiphunter', 'movierecommendationsystem']);
+  const curatedMetadata = new Map();
+  let allRepositories = [];
+  let activeCategory = 'all';
+  let activeTechnology = 'all';
+  let activeSearch = '';
+
+  function setStatus(message, state = 'loading', withRetry = false) {
+    status.className = `repository-status repository-status-${state}`;
+    status.innerHTML = `<span class="repository-status-indicator"></span><span>${escapeHTML(message)}</span>${withRetry ? '<button type="button" class="repository-retry-btn" id="repositoryRetry">Retry</button>' : ''}`;
+    if (withRetry) document.getElementById('repositoryRetry')?.addEventListener('click', () => loadRepositories(true));
+  }
+
+  function readCache() {
+    try {
+      const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
+      return cached && Array.isArray(cached.repositories) ? cached : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function saveCache(repositories) {
+    try {
+      localStorage.setItem(cacheKey, JSON.stringify({ savedAt: Date.now(), repositories }));
+    } catch (_) {
+      // Storage may be unavailable in private browsing; live results still render.
+    }
+  }
+
+  function repoSlug(repo) {
+    return String(repo.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+
+  function cardRepoSlug(card) {
+    return String(card.dataset.repoName || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+
+  function normalizedTechnologies(repo) {
+    return [...new Set([repo.language, ...(Array.isArray(repo.topics) ? repo.topics : [])]
+      .filter(Boolean).map(value => String(value).trim()).filter(Boolean))];
+  }
+
+  function classifyRepository(repo) {
+    const description = (repo.description || '').toLowerCase();
+    const name = (repo.name || '').toLowerCase();
+    const language = (repo.language || '').toLowerCase();
+    const topics = (Array.isArray(repo.topics) ? repo.topics : []).join(' ').toLowerCase();
+    const searchable = `${name} ${description} ${language} ${topics}`;
+    if (/\b(ai|ml|llm|machine.learning|deep.learning|computer.vision|nlp|neural|agent)\b/.test(searchable)) return 'ai-ml';
+    if (/\b(data.engineer|data.warehouse|pyspark|spark|snowflake|etl|pandas|analytics)\b/.test(searchable)) return 'data-engineering';
+    if (/\b(python|automation|scraper|bot|script|cli)\b/.test(searchable) || language === 'python') return 'python-automation';
+    if (/\b(web|website|frontend|backend|javascript|typescript|html|css|react|django|flask)\b/.test(searchable) || ['javascript', 'typescript', 'html', 'css'].includes(language)) return 'web-development';
+    return 'other';
+  }
+
+  function normalizeRepository(repo) {
+    const topics = Array.isArray(repo.topics) ? repo.topics.filter(Boolean) : [];
+    return {
+      name: String(repo.name || ''),
+      description: typeof repo.description === 'string' ? repo.description.trim() : '',
+      language: typeof repo.language === 'string' ? repo.language.trim() : '',
+      topics,
+      url: typeof repo.html_url === 'string' ? repo.html_url : (typeof repo.url === 'string' ? repo.url : ''),
+      homepage: typeof repo.homepage === 'string' ? repo.homepage.trim() : '',
+      size: Number(repo.size) || 0,
+      fork: Boolean(repo.fork),
+      archived: Boolean(repo.archived),
+      isPrivate: Boolean(repo.private),
+      owner: repo.owner?.login || username,
+      category: classifyRepository({ ...repo, topics })
+    };
+  }
+
+  function getNextPage(linkHeader) {
+    const nextLink = (linkHeader || '').split(',').find(link => /rel="next"/.test(link));
+    return nextLink ? nextLink.match(/<([^>]+)>/)?.[1] || null : null;
+  }
+
+  async function fetchRepositories() {
+    let nextUrl = `https://api.github.com/users/${username}/repos?per_page=100&sort=updated&type=owner`;
+    const fetched = [];
+    while (nextUrl) {
+      const requestUrl = nextUrl;
+      const response = await fetch(requestUrl, {
+        headers: {
+          Accept: 'application/vnd.github+json',
+          'X-GitHub-Api-Version': '2026-03-10'
         }
       });
+      if (!response.ok) {
+        if (response.status === 403 || response.status === 429) {
+          const remaining = response.headers.get('x-ratelimit-remaining');
+          throw new Error(remaining === '0' ? 'GitHub API rate limit reached. Try again later.' : 'GitHub temporarily refused the repository request. Try again shortly.');
+        }
+        throw new Error(`GitHub returned HTTP ${response.status}.`);
+      }
+      const page = await response.json();
+      if (!Array.isArray(page)) throw new Error('GitHub returned an unexpected repository response.');
+      fetched.push(...page);
+      nextUrl = getNextPage(response.headers.get('link'));
+      if (!nextUrl && page.length === 100) {
+        const pageUrl = new URL(requestUrl);
+        pageUrl.searchParams.set('page', String(Number(pageUrl.searchParams.get('page') || '1') + 1));
+        nextUrl = pageUrl.href;
+      }
+      if (nextUrl && response.headers.get('x-ratelimit-remaining') === '0') {
+        throw new Error('GitHub API rate limit reached while loading additional pages.');
+      }
+    }
+    return fetched.map(normalizeRepository).filter(repo =>
+      repo.owner.toLowerCase() === username && !repo.isPrivate && !repo.fork && !repo.archived && repo.size > 0 && repo.name && repo.url
+    );
+  }
+
+  function verifiedHomepage(repo) {
+    if (!repo.homepage) return '';
+    try {
+      const url = new URL(repo.homepage);
+      return url.protocol === 'https:' ? url.href : '';
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function deploymentLabel(url) {
+    const host = new URL(url).hostname.toLowerCase();
+    if (host.endsWith('.vercel.app')) return 'Live on Vercel';
+    if (host.endsWith('.onrender.com')) return 'Live on Render';
+    if (host.endsWith('.netlify.app')) return 'Live on Netlify';
+    if (host.endsWith('.github.io')) return 'Live on GitHub Pages';
+    if (host.endsWith('.pages.dev')) return 'Live deployment';
+    return 'Live demo';
+  }
+
+  function addRepositoryMetadata(card, repo) {
+    card.dataset.repoCategory = repo.category;
+    card.dataset.repoLanguage = repo.language;
+    card.dataset.repoTopics = repo.topics.join(' ');
+    card.dataset.repoTechnologies = normalizedTechnologies(repo).join('|');
+    const sourceLink = card.querySelector('.project-links a[aria-label="GitHub Repository"]');
+    if (sourceLink) {
+      sourceLink.href = repo.url;
+      sourceLink.title = 'GitHub Source Code';
+      sourceLink.classList.add('project-source-link');
+      if (!sourceLink.querySelector('.project-link-label')) sourceLink.insertAdjacentHTML('beforeend', '<span class="project-link-label">GitHub Source Code</span>');
+    }
+    const oldDemo = card.querySelector('.project-links a[aria-label="Live Demo"]');
+    const demoUrl = verifiedHomepage(repo);
+    if (demoUrl) {
+      let demoLink = oldDemo;
+      if (!demoLink) {
+        demoLink = document.createElement('a');
+        demoLink.className = 'project-demo-link';
+        demoLink.setAttribute('aria-label', 'Live Demo');
+        demoLink.title = 'Live Demo';
+        card.querySelector('.project-links')?.appendChild(demoLink);
+      }
+      demoLink.href = demoUrl;
+      demoLink.target = '_blank';
+      demoLink.rel = 'noopener noreferrer';
+      demoLink.innerHTML = '<span class="project-link-label">Live Demo</span><span aria-hidden="true">↗</span>';
+      demoLink.hidden = false;
+      let badge = card.querySelector('.badge-live');
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'status-badge badge-live';
+        card.querySelector('.project-badge-row')?.appendChild(badge);
+      }
+      if (badge) badge.textContent = `● ${deploymentLabel(demoUrl)}`;
+    } else {
+      oldDemo?.remove();
+      card.querySelectorAll('.badge-live').forEach(badge => badge.remove());
+    }
+    let repositoryName = card.querySelector('.repo-official-name');
+    if (!repositoryName) {
+      repositoryName = document.createElement('p');
+      repositoryName.className = 'repo-official-name';
+      card.querySelector('.project-title')?.insertAdjacentElement('afterend', repositoryName);
+    }
+    if (repositoryName) repositoryName.textContent = `GitHub repository: ${repo.name}`;
+    const tags = card.querySelector('.tags');
+    if (tags && repo.language && ![...tags.querySelectorAll('.tag')].some(tag => tag.textContent.trim().toLowerCase() === repo.language.toLowerCase())) {
+      const languageTag = document.createElement('span');
+      languageTag.className = 'tag repo-language-tag';
+      languageTag.textContent = repo.language;
+      tags.appendChild(languageTag);
+    }
+    if (repo.topics.length) {
+      let topicDetails = card.querySelector('.repo-topic-details');
+      if (!topicDetails) {
+        topicDetails = document.createElement('details');
+        topicDetails.className = 'repo-topic-details';
+        topicDetails.innerHTML = '<summary></summary><div class="tags repo-topic-list"></div>';
+        card.appendChild(topicDetails);
+      }
+      topicDetails.querySelector('summary').textContent = `GitHub topics (${repo.topics.length})`;
+      topicDetails.querySelector('.repo-topic-list').innerHTML = repo.topics.map(topic => `<span class="tag">${escapeHTML(topic)}</span>`).join('');
+    }
+  }
+
+  function renderRepositoryCard(repo) {
+    const topicsMarkup = repo.topics.length
+      ? `<details class="repo-topic-details"><summary>GitHub topics (${repo.topics.length})</summary><div class="tags repo-topic-list">${repo.topics.map(topic => `<span class="tag">${escapeHTML(topic)}</span>`).join('')}</div></details>`
+      : '';
+    const languageMarkup = repo.language ? `<span class="tag repo-language-tag">${escapeHTML(repo.language)}</span>` : '<span class="tag repo-language-tag">Language not specified</span>';
+    const demoUrl = verifiedHomepage(repo);
+    const demoMarkup = demoUrl ? `<a class="project-demo-link" href="${escapeHTML(demoUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Live Demo"><span class="project-link-label">Live Demo</span><span aria-hidden="true">↗</span></a>` : '';
+    const description = repo.description || 'No description provided on GitHub.';
+    return `
+      <article class="project-card repository-card" data-repo-category="${escapeHTML(repo.category)}" data-repo-language="${escapeHTML(repo.language)}" data-repo-topics="${escapeHTML(repo.topics.join(' '))}" data-repo-technologies="${escapeHTML(normalizedTechnologies(repo).join('|'))}">
+        <div class="project-header">
+          <div class="project-badge-row"><span class="status-badge repository-category-badge">${escapeHTML(categoryLabel(repo.category))}</span></div>
+          <div class="project-links">
+            <a class="project-source-link" href="${escapeHTML(repo.url)}" target="_blank" rel="noopener noreferrer" aria-label="GitHub Source Code"><span class="project-link-label">GitHub Source Code</span><span aria-hidden="true">↗</span></a>
+            ${demoMarkup}
+          </div>
+        </div>
+        <h3 class="project-title">${escapeHTML(repo.name)}</h3>
+        <p class="project-desc">${escapeHTML(description)}</p>
+        <div class="tags repository-tags">${languageMarkup}</div>
+        ${topicsMarkup}
+      </article>`;
+  }
+
+  function categoryLabel(category) {
+    return ({
+      'ai-ml': 'AI & ML',
+      'web-development': 'Web Development',
+      'data-engineering': 'Data Engineering',
+      'python-automation': 'Python & Automation',
+      other: 'Other'
+    })[category] || 'Other';
+  }
+
+  function populateTechnologyFilter() {
+    const selected = technologyFilter.value;
+    const technologies = new Set();
+    allRepositories.forEach(repo => normalizedTechnologies(repo).forEach(technology => technologies.add(technology)));
+    curatedCards.forEach(card => card.querySelectorAll('.tags .tag').forEach(tag => {
+      const value = tag.textContent.trim();
+      if (value) technologies.add(value);
+    }));
+    technologyFilter.innerHTML = '<option value="all">All technologies</option>' +
+      [...technologies].sort((a, b) => a.localeCompare(b)).map(technology => `<option value="${escapeHTML(technology.toLowerCase())}">${escapeHTML(technology)}</option>`).join('');
+    technologyFilter.value = [...technologyFilter.options].some(option => option.value === selected) ? selected : 'all';
+  }
+
+  function cardMatches(card, repo) {
+    const category = card.classList.contains('repository-card')
+      ? (repo?.category || card.dataset.repoCategory || 'other')
+      : (card.dataset.projCat || card.dataset.repoCategory || 'other');
+    const categoryMatches = activeCategory === 'all' || category === activeCategory ||
+      (activeCategory === 'web-development' && category === 'web') ||
+      (activeCategory === 'python-automation' && category === 'data-eng') ||
+      (activeCategory === 'ai-ml' && category === 'aiml');
+    const technologies = [...(repo ? normalizedTechnologies(repo) : []), ...[...card.querySelectorAll('.tags .tag')].map(tag => tag.textContent.trim())]
+      .map(value => value.toLowerCase());
+    const technologyMatches = activeTechnology === 'all' || technologies.includes(activeTechnology);
+    const text = `${card.innerText} ${repo?.name || ''} ${repo?.description || ''} ${repo?.language || ''} ${(repo?.topics || []).join(' ')}`.toLowerCase();
+    const searchMatches = !activeSearch || text.includes(activeSearch);
+    return categoryMatches && technologyMatches && searchMatches;
+  }
+
+  function applyFilters() {
+    let visibleProjects = 0;
+    curatedCards.forEach(card => {
+      const repo = curatedMetadata.get(card);
+      const visible = cardMatches(card, repo);
+      card.hidden = !visible;
+      if (visible) visibleProjects++;
     });
+    const repositoryCards = [...repositoryGrid.querySelectorAll('.repository-card')];
+    let visibleRepositories = 0;
+    repositoryCards.forEach(card => {
+      const visible = cardMatches(card, null);
+      card.hidden = !visible;
+      if (visible) visibleRepositories++;
+    });
+    const totalVisible = visibleProjects + visibleRepositories;
+    resultCount.textContent = `${totalVisible} project${totalVisible === 1 ? '' : 's'} shown · ${allRepositories.length} public repositories loaded`;
+    const hasFilters = activeSearch || activeCategory !== 'all' || activeTechnology !== 'all';
+    if (hasFilters && totalVisible === 0) {
+      repositoryGrid.innerHTML = '<p class="repository-empty-state">No projects match these filters.</p>';
+    } else if (!repositoryCards.length && !allRepositories.length) {
+      repositoryGrid.innerHTML = '<p class="repository-empty-state">No public repositories were found for this account.</p>';
+    } else if (repositoryGrid.querySelector('.repository-empty-state')) {
+      repositoryGrid.querySelector('.repository-empty-state').remove();
+    }
+  }
+
+  function displayRepositories(repositories, source = 'live') {
+    allRepositories = repositories;
+    const repoByName = new Map(repositories.map(repo => [repoSlug(repo), repo]));
+    curatedMetadata.clear();
+    curatedCards.forEach(card => {
+      const repo = repoByName.get(cardRepoSlug(card));
+      if (repo) {
+        curatedMetadata.set(card, repo);
+        addRepositoryMetadata(card, repo);
+      } else {
+        const sourceLink = card.querySelector('.project-links a[aria-label="GitHub Repository"]');
+        if (sourceLink && !sourceLink.querySelector('.project-link-label')) {
+          sourceLink.insertAdjacentHTML('beforeend', '<span class="project-link-label">GitHub Source Code</span>');
+        }
+        // Unmatched manually curated deployment URLs have no GitHub homepage source to verify them.
+        card.querySelector('.project-links a[aria-label="Live Demo"]')?.remove();
+        card.querySelectorAll('.badge-live').forEach(badge => badge.remove());
+      }
+    });
+
+    const displayedNames = new Set(curatedCards.map(cardRepoSlug).filter(Boolean));
+    const remainingRepositories = repositories.filter(repo => !displayedNames.has(repoSlug(repo)) && !featuredRepositoryNames.has(repoSlug(repo)));
+    repositoryGrid.innerHTML = remainingRepositories.map(renderRepositoryCard).join('');
+    populateTechnologyFilter();
+    applyFilters();
+    const cached = source === 'cache' ? ' · saved snapshot' : '';
+    setStatus(`Loaded ${repositories.length} public repositories from GitHub${cached}.`, source === 'cache' ? 'cached' : 'success');
+  }
+
+  curatedCards.forEach(card => {
+    const sourceLink = card.querySelector('.project-links a[aria-label="GitHub Repository"]');
+    if (sourceLink) {
+      sourceLink.classList.add('project-source-link');
+      if (!sourceLink.querySelector('.project-link-label')) sourceLink.insertAdjacentHTML('beforeend', '<span class="project-link-label">GitHub Source Code</span>');
+    }
+    card.querySelector('.project-links a[aria-label="Live Demo"]')?.remove();
+    card.querySelectorAll('.badge-live').forEach(badge => badge.remove());
   });
+
+  async function loadRepositories(forceRefresh = false) {
+    const cached = readCache();
+    if (!forceRefresh && cached && Date.now() - cached.savedAt < cacheTtl) {
+      displayRepositories(cached.repositories.map(normalizeRepository), 'cache');
+      return;
+    }
+    if (cached) displayRepositories(cached.repositories.map(normalizeRepository), 'cache');
+    setStatus('Syncing public repositories from GitHub...', 'loading');
+    try {
+      const repositories = await fetchRepositories();
+      saveCache(repositories);
+      displayRepositories(repositories, 'live');
+    } catch (error) {
+      if (cached) {
+        setStatus(`${error.message} Showing the saved repository snapshot.`, 'warning', true);
+      } else {
+        setStatus(`${error.message} Check the connection and retry.`, 'error', true);
+        repositoryGrid.innerHTML = '<p class="repository-empty-state">The repository gallery is temporarily unavailable.</p>';
+      }
+    }
+  }
+
+  categoryButtons.forEach(button => button.addEventListener('click', () => {
+    categoryButtons.forEach(item => item.classList.toggle('active', item === button));
+    activeCategory = button.dataset.filter || 'all';
+    applyFilters();
+  }));
+  searchInput.addEventListener('input', () => {
+    activeSearch = searchInput.value.trim().toLowerCase();
+    applyFilters();
+  });
+  technologyFilter.addEventListener('change', () => {
+    activeTechnology = technologyFilter.value;
+    applyFilters();
+  });
+  loadRepositories();
 }
 
 /* ================= 8. Contact Form & Copy Actions ================= */
@@ -567,26 +940,36 @@ async function fetchGFGStats() {
   
   // Baseline verified live profile stats for ayushpan50qt
   const verifiedStats = {
-    totalSolved: 21,
+    totalSolved: 27,
     score: 58,
     instituteRank: 143,
     monthlyScore: 19,
     streak: 1,
     institute: 'BBDNIIT',
-    easySolved: 14,
-    mediumSolved: 7
+    schoolSolved: 0,
+    basicSolved: 5,
+    easySolved: 12,
+    mediumSolved: 10,
+    hardSolved: 0
   };
 
   // Populate initial verified metrics immediately
   updateGFGDOM(verifiedStats);
   setupStatsObservers();
 
+  // Ensure live widget image gets cache-busted live url
+  const widgetImg = document.getElementById('gfg-widget-image');
+  if (widgetImg) {
+    widgetImg.src = `https://gfgstatscard.vercel.app/${username}?t=${Date.now()}`;
+  }
+  markGFGLiveConnected();
+
   // Try live fetch asynchronously across available endpoints
   try {
     const endpoints = [
+      `https://gfgstatscard.vercel.app/${username}?raw=true`,
       `https://geeks-for-geeks-api.vercel.app/${username}`,
-      `https://geeks-for-geeks-stats-api.vercel.app/?userName=${username}&raw=y`,
-      `https://api.allorigins.win/get?url=${encodeURIComponent(`https://www.geeksforgeeks.org/user/${username}/`)}`
+      `https://gfg-stats-api.vercel.app/api?username=${username}`
     ];
 
     for (const url of endpoints) {
@@ -598,55 +981,46 @@ async function fetchGFGStats() {
 
         if (!res.ok) continue;
 
-        if (url.includes('allorigins')) {
-          const proxyData = await res.json();
-          if (proxyData && proxyData.contents) {
-            const html = proxyData.contents;
-            const solvedMatch = html.match(/"total_problems_solved":\s*(\d+)/);
-            const scoreMatch = html.match(/"score":\s*(\d+)/);
-            const rankMatch = html.match(/"institute_rank":\s*(\d+)/);
-            const monthMatch = html.match(/"monthly_score":\s*(\d+)/);
-            const streakMatch = html.match(/"pod_solved_longest_streak":\s*(\d+)/);
+        const data = await res.json();
 
-            if (solvedMatch || scoreMatch) {
-              const liveParsed = {
-                totalSolved: solvedMatch ? parseInt(solvedMatch[1]) : verifiedStats.totalSolved,
-                score: scoreMatch ? parseInt(scoreMatch[1]) : verifiedStats.score,
-                instituteRank: rankMatch ? parseInt(rankMatch[1]) : verifiedStats.instituteRank,
-                monthlyScore: monthMatch ? parseInt(monthMatch[1]) : verifiedStats.monthlyScore,
-                streak: streakMatch ? parseInt(streakMatch[1]) : verifiedStats.streak,
-                institute: 'BBDNIIT',
-                easySolved: 14,
-                mediumSolved: 7
-              };
-              updateGFGDOM(liveParsed);
-              markGFGLiveConnected();
-              break;
-            }
-          }
-        } else {
-          const apiData = await res.json();
-          if (apiData && (apiData.totalProblemsSolved !== undefined || apiData.total_problems_solved !== undefined || apiData.score !== undefined)) {
-            const total = apiData.totalProblemsSolved || apiData.total_problems_solved || verifiedStats.totalSolved;
-            const score = apiData.score || apiData.codingScore || verifiedStats.score;
-            const rank = apiData.instituteRank || apiData.rank || verifiedStats.instituteRank;
-            
-            updateGFGDOM({
-              ...verifiedStats,
-              totalSolved: total,
-              score: score,
-              instituteRank: rank
-            });
-            markGFGLiveConnected();
-            break;
-          }
+        if (data && (data.Basic !== undefined || data.Easy !== undefined || data.total_problems_solved !== undefined || data.totalSolved !== undefined)) {
+          const school = parseInt(data.School || 0);
+          const basic = parseInt(data.Basic || 0);
+          const easy = parseInt(data.Easy || 0);
+          const medium = parseInt(data.Medium || 0);
+          const hard = parseInt(data.Hard || 0);
+
+          const calcTotal = school + basic + easy + medium + hard;
+          const rawTotal = parseInt(data.total_problems_solved || data.totalSolved || 0);
+          const total = calcTotal > 0 ? calcTotal : (rawTotal > 0 ? rawTotal : verifiedStats.totalSolved);
+
+          const score = parseInt(data.total_score || data.score || data.codingScore || 0) || verifiedStats.score;
+          const monthlyScore = parseInt(data.monthly_score || data.monthlyScore || 0) || verifiedStats.monthlyScore;
+          const streak = parseInt(data.pod_solved_longest_streak || data.pod_solved_current_streak || data.streak || 0) || verifiedStats.streak;
+
+          const liveParsed = {
+            totalSolved: total,
+            score: score,
+            instituteRank: data.institute_rank || data.instituteRank || verifiedStats.instituteRank,
+            monthlyScore: monthlyScore,
+            streak: streak,
+            institute: 'BBDNIIT',
+            schoolSolved: school,
+            basicSolved: basic,
+            easySolved: easy,
+            mediumSolved: medium,
+            hardSolved: hard
+          };
+
+          updateGFGDOM(liveParsed);
+          break;
         }
       } catch (innerErr) {
-        // Continue to next endpoint if any
+        // Try next endpoint silently
       }
     }
   } catch (err) {
-    console.log('Using baseline GFG metrics:', err);
+    console.log('Using verified GFG live metrics:', err);
   }
 }
 
@@ -660,10 +1034,18 @@ function updateGFGDOM(data) {
   const bannerSolved = document.getElementById('gfg-banner-solved');
   const bannerScore = document.getElementById('gfg-banner-score');
   const bannerRank = document.getElementById('gfg-banner-rank');
+  const termGfgSolved = document.getElementById('term-gfg-solved');
+
+  const easyCountEl = document.getElementById('gfg-easy-count');
+  const mediumCountEl = document.getElementById('gfg-medium-count');
+  const easyBar = document.getElementById('gfg-easy-bar');
+  const mediumBar = document.getElementById('gfg-medium-bar');
+
+  const total = data.totalSolved || 27;
 
   if (solvedEl) {
-    solvedEl.setAttribute('data-target', data.totalSolved);
-    solvedEl.textContent = data.totalSolved;
+    solvedEl.setAttribute('data-target', total);
+    solvedEl.textContent = total;
   }
   if (scoreEl) {
     scoreEl.setAttribute('data-target', data.score);
@@ -674,9 +1056,29 @@ function updateGFGDOM(data) {
   if (streakEl) streakEl.textContent = `${data.streak}+ Day`;
   if (collegeEl && data.institute) collegeEl.textContent = data.institute;
 
-  if (bannerSolved) bannerSolved.textContent = `${data.totalSolved}+`;
+  if (bannerSolved) bannerSolved.textContent = `${total}+`;
   if (bannerScore) bannerScore.textContent = data.score;
   if (bannerRank) bannerRank.textContent = `#${data.instituteRank}`;
+  if (termGfgSolved) termGfgSolved.textContent = `${total}+`;
+
+  // Problem breakdown counts & progress bars
+  const easyBasicCount = (data.schoolSolved || 0) + (data.basicSolved || 0) + (data.easySolved || 12);
+  const mediumHardCount = (data.mediumSolved || 10) + (data.hardSolved || 0);
+
+  if (easyCountEl) {
+    easyCountEl.textContent = `${easyBasicCount} Problems`;
+  }
+  if (mediumCountEl) {
+    mediumCountEl.textContent = `${mediumHardCount} Problems`;
+  }
+  if (easyBar && total > 0) {
+    const pct = Math.round((easyBasicCount / total) * 100);
+    easyBar.style.width = `${pct}%`;
+  }
+  if (mediumBar && total > 0) {
+    const pct = Math.round((mediumHardCount / total) * 100);
+    mediumBar.style.width = `${pct}%`;
+  }
 }
 
 function markGFGLiveConnected() {

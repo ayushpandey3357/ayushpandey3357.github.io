@@ -998,7 +998,7 @@ function escapeHTML(str) {
 }
 
 /* ================= 12. GeeksforGeeks Live Stats Fetcher ================= */
-async function fetchGFGStats() {
+function fetchGFGStats() {
   const username = 'ayushpan50qt';
   
   // Baseline verified live profile stats for ayushpan50qt
@@ -1020,70 +1020,12 @@ async function fetchGFGStats() {
   updateGFGDOM(verifiedStats);
   setupStatsObservers();
 
-  // Ensure live widget image gets cache-busted live url
+  // Use the image widget for live stats; its JSON endpoints do not allow browser CORS.
   const widgetImg = document.getElementById('gfg-widget-image');
   if (widgetImg) {
+    widgetImg.addEventListener('load', markGFGLiveConnected, { once: true });
+    widgetImg.addEventListener('error', markGFGWidgetUnavailable, { once: true });
     widgetImg.src = `https://gfgstatscard.vercel.app/${username}?t=${Date.now()}`;
-  }
-  markGFGLiveConnected();
-
-  // Try live fetch asynchronously across available endpoints
-  try {
-    const endpoints = [
-      `https://gfgstatscard.vercel.app/${username}?raw=true`,
-      `https://geeks-for-geeks-api.vercel.app/${username}`,
-      `https://gfg-stats-api.vercel.app/api?username=${username}`
-    ];
-
-    for (const url of endpoints) {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 4000);
-        const res = await fetch(url, { signal: controller.signal });
-        clearTimeout(timeoutId);
-
-        if (!res.ok) continue;
-
-        const data = await res.json();
-
-        if (data && (data.Basic !== undefined || data.Easy !== undefined || data.total_problems_solved !== undefined || data.totalSolved !== undefined)) {
-          const school = parseInt(data.School || 0);
-          const basic = parseInt(data.Basic || 0);
-          const easy = parseInt(data.Easy || 0);
-          const medium = parseInt(data.Medium || 0);
-          const hard = parseInt(data.Hard || 0);
-
-          const calcTotal = school + basic + easy + medium + hard;
-          const rawTotal = parseInt(data.total_problems_solved || data.totalSolved || 0);
-          const total = calcTotal > 0 ? calcTotal : (rawTotal > 0 ? rawTotal : verifiedStats.totalSolved);
-
-          const score = parseInt(data.total_score || data.score || data.codingScore || 0) || verifiedStats.score;
-          const monthlyScore = parseInt(data.monthly_score || data.monthlyScore || 0) || verifiedStats.monthlyScore;
-          const streak = parseInt(data.pod_solved_longest_streak || data.pod_solved_current_streak || data.streak || 0) || verifiedStats.streak;
-
-          const liveParsed = {
-            totalSolved: total,
-            score: score,
-            instituteRank: data.institute_rank || data.instituteRank || verifiedStats.instituteRank,
-            monthlyScore: monthlyScore,
-            streak: streak,
-            institute: 'BBDNIIT',
-            schoolSolved: school,
-            basicSolved: basic,
-            easySolved: easy,
-            mediumSolved: medium,
-            hardSolved: hard
-          };
-
-          updateGFGDOM(liveParsed);
-          break;
-        }
-      } catch (innerErr) {
-        // Try next endpoint silently
-      }
-    }
-  } catch (err) {
-    console.log('Using verified GFG live metrics:', err);
   }
 }
 
@@ -1147,8 +1089,16 @@ function updateGFGDOM(data) {
 function markGFGLiveConnected() {
   const badge = document.getElementById('gfg-status-badge');
   if (badge) {
-    badge.innerHTML = '<span class="pulse-dot gfg-dot"></span> Live Sync';
+    badge.innerHTML = '<span class="pulse-dot gfg-dot"></span> Live Widget';
     badge.classList.add('connected');
+  }
+}
+
+function markGFGWidgetUnavailable() {
+  const badge = document.getElementById('gfg-status-badge');
+  if (badge) {
+    badge.textContent = 'Widget unavailable';
+    badge.classList.remove('connected');
   }
 }
 

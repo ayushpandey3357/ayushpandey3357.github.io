@@ -132,12 +132,11 @@ function initParticleCanvas() {
 /* ================= 3. Hero Typed Text Effect ================= */
 function initTypedText() {
   const phrases = [
-    '200+ DSA Problems (LeetCode & GFG).',
-    'AI / ML Solutions & Models.',
-    'Apache Spark & PySpark Pipelines.',
-    'Snowflake & Data Warehousing.',
-    'Backend Django & Flask REST APIs.',
-    'Computer Vision & Signal Processing.'
+    'Machine Learning applications.',
+    'Computer Vision systems.',
+    'Local LLM integration with Ollama.',
+    'Python automation and APIs.',
+    'Recommendation workflows.'
   ];
   const typedEl = document.getElementById('typed');
   if (!typedEl) return;
@@ -261,8 +260,8 @@ function initInteractiveTerminal() {
 
   const commands = {
     help: 'Available commands: <span class="term-cmd">skills</span>, <span class="term-cmd">projects</span>, <span class="term-cmd">gfg</span>, <span class="term-cmd">leetcode</span>, <span class="term-cmd">contact</span>, <span class="term-cmd">about</span>, <span class="term-cmd">github</span>, <span class="term-cmd">linkedin</span>, <span class="term-cmd">clear</span>',
-    skills: '⚡ Core Stack: Python, PySpark, Snowflake, TensorFlow, OpenCV, Django, Flask, MySQL, Docker',
-    projects: '🚀 Featured Projects: VideoAuthenticator (AI Media Forensics), Krishi-Mitra (AI Crop Disease Detector), EcoPackAI, AI Internship Hunter',
+    skills: '⚡ Core toolkit: Python, PyTorch, Scikit-learn, OpenCV, Ollama, Django, Flask, FastAPI, SQL',
+    projects: '🚀 Featured Projects: AI Internship Hunter, Madhav-AI, KrishiMitr, EcoPackAI, Movie Recommendation Engine',
     contact: '✉️ Email: <a href="mailto:ayushpandey1974@gmail.com" style="color:var(--accent)">ayushpandey1974@gmail.com</a> | 📞 Phone: <a href="tel:+919336338906" style="color:var(--accent)">+91-9336338906</a> | 📍 Location: Lucknow, India',
     about: '🎓 B.Tech CSE Student @ BBDNIIT (2023-2027) | Infosys Springboard AI Domain Intern | 200+ Solved DSA Problems',
     github: 'Opening GitHub profile (<a href="https://github.com/ayushpandey3357" target="_blank" style="color:var(--accent)">github.com/ayushpandey3357</a>)...',
@@ -278,13 +277,13 @@ function initInteractiveTerminal() {
     // Append user command line
     const userLine = document.createElement('div');
     userLine.className = 'term-line';
-    userLine.innerHTML = `<span class="term-prompt">ayush@portfolio:~$</span> ${escapeHTML(rawCmd)}`;
+    userLine.innerHTML = `<span class="term-prompt">You explored</span> ${escapeHTML(rawCmd)}`;
     terminalBody.appendChild(userLine);
 
     if (cmd === 'clear') {
       terminalBody.innerHTML = `
         <div class="term-line output-welcome">
-          <span class="term-prompt">ayush@portfolio:~$</span> welcome --interactive
+          <span class="term-prompt">Selected work</span> Choose another topic below to continue exploring.
         </div>
         <div class="term-line output-text">
           👋 Terminal cleared. Type <span class="term-cmd">help</span> for available commands.
@@ -399,7 +398,7 @@ function initGitHubRepositoryGallery() {
   if (!curatedGrid || !repositoryGrid || !status || !resultCount || !searchInput || !technologyFilter) return;
 
   const curatedCards = [...curatedGrid.querySelectorAll('.project-card')];
-  const featuredRepositoryNames = new Set(['videoauthenticator', 'krishimitr', 'aiinternshiphunter', 'movierecommendationsystem']);
+  const featuredRepositoryNames = new Set(['videoauthenticator', 'krishimitr', 'aiinternshiphunter', 'movierecommendationsystem', 'madhavai']);
   const curatedMetadata = new Map();
   let allRepositories = [];
   let activeCategory = 'all';
@@ -784,6 +783,13 @@ function initEditorialProjectArtwork() {
     other: 'other'
   })[category] || 'other';
 
+  const verifiedScreenshots = {
+    KRISHIMITR: {
+      src: 'images/Screenshot%202026-10-12%20021739.png',
+      alt: 'KrishiMitr agricultural guidance homepage with its farming assistant open'
+    }
+  };
+
   function decorate(card) {
     if (card.querySelector('.project-art')) return;
     const title = card.querySelector('.project-title')?.textContent.trim() || 'Project';
@@ -793,7 +799,21 @@ function initEditorialProjectArtwork() {
     const artwork = document.createElement('div');
     artwork.className = `project-art project-art-${category}`;
     artwork.dataset.mark = mark;
-    artwork.setAttribute('aria-hidden', 'true');
+    const screenshot = verifiedScreenshots[card.dataset.repoName];
+    if (screenshot) {
+      artwork.classList.add('project-art-has-image');
+      const image = document.createElement('img');
+      image.className = 'project-art-image';
+      image.src = screenshot.src;
+      image.alt = screenshot.alt;
+      image.width = 1200;
+      image.height = 675;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      artwork.appendChild(image);
+    } else {
+      artwork.setAttribute('aria-hidden', 'true');
+    }
     card.insertBefore(artwork, card.firstChild);
   }
 

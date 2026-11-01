@@ -2,9 +2,9 @@
 
 ###  Live Demo
 
- **Click the image below to visit my portfolio website.**
+ **The portfolio is deployed with GitHub Pages.**
 
-[![Portfolio Preview](images/portfolio-preview.png)](https://ayushpandey3357.github.io/)
+[Visit the deployed portfolio](https://ayushpandey3357.github.io/)
 
 ##  About Me
 

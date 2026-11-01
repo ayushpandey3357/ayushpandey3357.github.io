@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactAndCopy();
   initBackToTop();
   fetchLeetCodeStats();
-  fetchGFGStats();
+  setupStatsObservers();
 });
 
 /* ================= 1. Dark & Light Theme System ================= */
@@ -267,7 +267,7 @@ function initInteractiveTerminal() {
     github: 'Opening GitHub profile (<a href="https://github.com/ayushpandey3357" target="_blank" style="color:var(--accent)">github.com/ayushpandey3357</a>)...',
     linkedin: 'Opening LinkedIn profile (<a href="https://linkedin.com/in/ayushpandey3357" target="_blank" style="color:var(--accent)">linkedin.com/in/ayushpandey3357</a>)...',
     leetcode: '🟠 <b>LeetCode Profile:</b> @P5Dtti61ig | 150+ Problems Solved | Rank: Top 30% | <a href="https://leetcode.com/u/P5Dtti61ig/" target="_blank" style="color:#FFA116">View Profile ↗</a>',
-    gfg: '🟢 <b>GeeksforGeeks Profile:</b> @ayushpan50qt | <span id="term-gfg-solved">27+</span> Problems Solved | Coding Score: 58 | Campus Rank: #143 (BBDNIIT) | <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" style="color:#00E676">View Profile ↗</a>'
+    gfg: '🟢 <b>GeeksforGeeks Profile:</b> @ayushpan50qt | <a href="https://www.geeksforgeeks.org/profile/ayushpan50qt?tab=activity" target="_blank" rel="noopener" style="color:#00E676">View Profile ↗</a>'
   };
 
   function executeCommand(rawCmd) {
@@ -919,7 +919,7 @@ function initBackToTop() {
   });
 }
 
-/* ================= 11. LeetCode & GFG Live Stats API ================= */
+/* ================= 11. LeetCode Stats API ================= */
 async function fetchLeetCodeStats() {
   const username = 'P5Dtti61ig';
   try {
@@ -997,115 +997,9 @@ function escapeHTML(str) {
   );
 }
 
-/* ================= 12. GeeksforGeeks Live Stats Fetcher ================= */
-function fetchGFGStats() {
-  const username = 'ayushpan50qt';
-  
-  // Baseline verified live profile stats for ayushpan50qt
-  const verifiedStats = {
-    totalSolved: 27,
-    score: 58,
-    instituteRank: 143,
-    monthlyScore: 19,
-    streak: 1,
-    institute: 'BBDNIIT',
-    schoolSolved: 0,
-    basicSolved: 5,
-    easySolved: 12,
-    mediumSolved: 10,
-    hardSolved: 0
-  };
-
-  // Populate initial verified metrics immediately
-  updateGFGDOM(verifiedStats);
-  setupStatsObservers();
-
-  // Use the image widget for live stats; its JSON endpoints do not allow browser CORS.
-  const widgetImg = document.getElementById('gfg-widget-image');
-  if (widgetImg) {
-    widgetImg.addEventListener('load', markGFGLiveConnected, { once: true });
-    widgetImg.addEventListener('error', markGFGWidgetUnavailable, { once: true });
-    widgetImg.src = `https://gfgstatscard.vercel.app/${username}?t=${Date.now()}`;
-  }
-}
-
-function updateGFGDOM(data) {
-  const solvedEl = document.getElementById('gfg-total-solved');
-  const scoreEl = document.getElementById('gfg-coding-score');
-  const rankEl = document.getElementById('gfg-institute-rank');
-  const monthEl = document.getElementById('gfg-monthly-score');
-  const streakEl = document.getElementById('gfg-streak');
-  const collegeEl = document.getElementById('gfg-college');
-  const bannerSolved = document.getElementById('gfg-banner-solved');
-  const bannerScore = document.getElementById('gfg-banner-score');
-  const bannerRank = document.getElementById('gfg-banner-rank');
-  const termGfgSolved = document.getElementById('term-gfg-solved');
-
-  const easyCountEl = document.getElementById('gfg-easy-count');
-  const mediumCountEl = document.getElementById('gfg-medium-count');
-  const easyBar = document.getElementById('gfg-easy-bar');
-  const mediumBar = document.getElementById('gfg-medium-bar');
-
-  const total = data.totalSolved || 27;
-
-  if (solvedEl) {
-    solvedEl.setAttribute('data-target', total);
-    solvedEl.textContent = total;
-  }
-  if (scoreEl) {
-    scoreEl.setAttribute('data-target', data.score);
-    scoreEl.textContent = data.score;
-  }
-  if (rankEl) rankEl.textContent = `Campus Rank: #${data.instituteRank}`;
-  if (monthEl) monthEl.textContent = data.monthlyScore;
-  if (streakEl) streakEl.textContent = `${data.streak}+ Day`;
-  if (collegeEl && data.institute) collegeEl.textContent = data.institute;
-
-  if (bannerSolved) bannerSolved.textContent = `${total}+`;
-  if (bannerScore) bannerScore.textContent = data.score;
-  if (bannerRank) bannerRank.textContent = `#${data.instituteRank}`;
-  if (termGfgSolved) termGfgSolved.textContent = `${total}+`;
-
-  // Problem breakdown counts & progress bars
-  const easyBasicCount = (data.schoolSolved || 0) + (data.basicSolved || 0) + (data.easySolved || 12);
-  const mediumHardCount = (data.mediumSolved || 10) + (data.hardSolved || 0);
-
-  if (easyCountEl) {
-    easyCountEl.textContent = `${easyBasicCount} Problems`;
-  }
-  if (mediumCountEl) {
-    mediumCountEl.textContent = `${mediumHardCount} Problems`;
-  }
-  if (easyBar && total > 0) {
-    const pct = Math.round((easyBasicCount / total) * 100);
-    easyBar.style.width = `${pct}%`;
-  }
-  if (mediumBar && total > 0) {
-    const pct = Math.round((mediumHardCount / total) * 100);
-    mediumBar.style.width = `${pct}%`;
-  }
-}
-
-function markGFGLiveConnected() {
-  const badge = document.getElementById('gfg-status-badge');
-  if (badge) {
-    badge.innerHTML = '<span class="pulse-dot gfg-dot"></span> Live Widget';
-    badge.classList.add('connected');
-  }
-}
-
-function markGFGWidgetUnavailable() {
-  const badge = document.getElementById('gfg-status-badge');
-  if (badge) {
-    badge.textContent = 'Widget unavailable';
-    badge.classList.remove('connected');
-  }
-}
-
 /* ================= 13. Interactive Stats Counter Animations ================= */
 function setupStatsObservers() {
   const leetCodeCard = document.querySelector('.leetcode-stats-card');
-  const gfgCard = document.querySelector('.gfg-stats-card');
 
   if (leetCodeCard) {
     let lcAnimated = false;
@@ -1118,17 +1012,6 @@ function setupStatsObservers() {
     lcObserver.observe(leetCodeCard);
   }
 
-  if (gfgCard) {
-    let gfgAnimated = false;
-    const gfgObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !gfgAnimated) {
-        gfgAnimated = true;
-        animateSingleCounter('gfg-total-solved');
-        animateSingleCounter('gfg-coding-score');
-      }
-    }, { threshold: 0.2 });
-    gfgObserver.observe(gfgCard);
-  }
 }
 
 function animateSingleCounter(elementId) {
